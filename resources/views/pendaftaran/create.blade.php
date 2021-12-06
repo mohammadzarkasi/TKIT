@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <meta name="copyright" content="MACode ID, https://macodeid.com/">
+    <link rel="shortcut icon" href={{asset("assets/images/favicon2.jpg")}} />
 
     <title>Pendaftaran TKIT</title>
 

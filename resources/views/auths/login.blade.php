@@ -15,7 +15,8 @@
   <!-- inject:css -->
   <link rel="stylesheet" href={{asset("assets/css/style.css")}}>
   <!-- endinject -->
-  <link rel="shortcut icon" href={{asset("assets/images/favicon.png")}} />
+  <!-- <link rel="shortcut icon" href={{asset("assets/images/favicon.png")}} /> -->
+  <link rel="shortcut icon" href={{asset("assets/images/favicon2.jpg")}} />
 </head>
 
 <body>
@@ -31,21 +32,26 @@
               <h4>Silahkan melakukan Login</h4>
               <h6 class="font-weight-light"> dengan email yang telah didaftarkan.</h6>
               <form action="{{ url('/postlogin') }}" method="POST" class="pt-3">
-              @csrf
-              <div class="form-group">
+                @csrf
+                <!-- <div class="form-group">
                   <input name="name" type="text" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Nama">
-                </div>  
-              <div class="form-group">
+                </div> -->
+                <div class="form-group">
+                  <label>Email</label>
                   <input name="email" type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
                 </div>
                 <div class="form-group">
+                  <label>Password</label>
                   <input name="password" type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="my-3">
                   <input type="submit" value="Login" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  Belum daftar akun? <a href="register.html" class="text-primary">Silahkan klik ini</a>
+                  Belum daftar akun? <a href="{{ url('/register') }}" class="text-primary">Silahkan klik di sini</a>
+                </div>
+                <div class="text-center font-weight-light">
+                  Atau kembali ke <a href="{{ url('/') }}" class="text-primary">Beranda</a>
                 </div>
               </form>
             </div>
@@ -69,4 +75,3 @@
 </body>
 
 </html>
-

@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <meta name="copyright" content="MACode ID, https://macodeid.com/">
-
+    <link rel="shortcut icon" href={{asset("assets/images/favicon2.jpg")}} />
     <title>Pendaftaran TKIT</title>
 
     <link rel="stylesheet" href={{asset("siswa/css/maicons.css")}}>
@@ -29,11 +27,9 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
             <div class="container">
-                <a class="navbar-brand brand-logo mr-5" href="{{ url('/') }}"><img src={{asset("siswa/img/logo.png")}} class="mr-2"
-                        alt="logo" /></a>
+                <a class="navbar-brand brand-logo mr-5" href="{{ url('/') }}"><img src={{asset("siswa/img/logo.png")}} class="mr-2" alt="logo" /></a>
 
-                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent"
-                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -119,8 +115,7 @@
     <footer class="page-footer bg-image" style="background-image: url(../siswa/img/footer.png);">
         <div class="container">
 
-            <p class="text-center" id="copyright">Copyright &copy; 2020. This template design and develop by <a
-                    href="https://macodeid.com/" target="_blank">MACode ID</a></p>
+            <p class="text-center" id="copyright">Copyright &copy; 2020. This template design and develop by <a href="https://macodeid.com/" target="_blank">MACode ID</a></p>
         </div>
     </footer>
 

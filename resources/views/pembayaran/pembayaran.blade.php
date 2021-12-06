@@ -18,6 +18,7 @@
     <link rel="stylesheet" href={{asset("siswa/vendor/animate/animate.css")}}>
 
     <link rel="stylesheet" href={{asset("siswa/css/theme.css")}}>
+    <link rel="shortcut icon" href={{asset("assets/images/favicon2.jpg")}} />
 
 </head>
 
