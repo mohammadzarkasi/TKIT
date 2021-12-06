@@ -49,6 +49,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('pembayaran/pembayaran') }}">Pembayaran</a>
                             </li>
+
+                            <li class="nav-item">
+                                <button class="btn btn-primary ml-lg-2" onclick="promptLogout()">Logout</button>
+                            </li>
                             
 
                         @else
@@ -92,6 +96,10 @@
         </div>
     </footer>
 
+    <script>
+        var base_url = '{{ url('/') }}';
+    </script>
+
     <script src={{asset("siswa/js/jquery-3.5.1.min.js")}}></script>
 
     <script src={{asset("siswa/js/bootstrap.bundle.min.js")}}></script>
@@ -101,6 +109,7 @@
     <script src={{asset("siswa/vendor/wow/wow.min.js")}}></script>
 
     <script src={{asset("siswa/js/theme.js")}}></script>
+    <script src={{asset("js/common.js")}}></script>
 
 </body>
 

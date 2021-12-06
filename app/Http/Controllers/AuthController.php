@@ -21,10 +21,17 @@ class AuthController extends Controller
         return view('auths.login');
     }
 
-    public function logout()
+    public function logout(Request $req)
     {
-        Auth::logout();
-        return direct('/login');
+        if($req->sess != null)
+        {
+            $token = $req->sess['token'];
+            // print_r($token);
+            // exit();
+            MySession::where('token', $token)->delete();
+        }
+
+        return redirect('/');
     }
 
     /**
@@ -60,7 +67,7 @@ class AuthController extends Controller
 
         if (count($users) < 1) {
             // return response()->json(['error' => 'username tidak ditemukan'], 401);
-            return redirect()->back()->with('errmsg', 'user tidak ditemukan');
+            return redirect()->back()->with('errmsg', 'user tidak ditemukan')->withInput();
         }
         $user = $users[0];
 
@@ -81,7 +88,7 @@ class AuthController extends Controller
         }
         else{
             // return redirect()->back()->with
-            return redirect('/login')->with('errmsg', 'password tidak cocok');
+            return redirect('/login')->with('errmsg', 'password tidak cocok')->withInput();
         }
     }
 
