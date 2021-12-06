@@ -1,4 +1,4 @@
-@extends('auths.template', ['title' => 'Regiter'])
+@extends('auths.template', ['title' => 'Registrasi Pengguna'])
 
 @section('content')
         {{-- @include('auths.register') --}}

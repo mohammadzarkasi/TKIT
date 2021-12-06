@@ -31,7 +31,7 @@
               </div>
               <h4>Silahkan melakukan Login</h4>
               <h6 class="font-weight-light"> dengan email yang telah didaftarkan.</h6>
-              <form action="{{ url('/postlogin') }}" method="POST" class="pt-3">
+              <form action="{{ url('/login') }}" method="POST" class="pt-3">
                 @csrf
                 <!-- <div class="form-group">
                   <input name="name" type="text" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Nama">
@@ -44,6 +44,20 @@
                   <label>Password</label>
                   <input name="password" type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                 </div>
+
+                @if(\Session::has('errmsg'))
+                  <div class="text-center font-weight-light text-danger mb-4">
+                    {{ \Session::get('errmsg') }}
+                  </div>
+                @endif
+
+
+                <div class="text-right font-weight-light">
+                  Lupa password? <a href="{{ url('/forgot-password') }}" class="text-primary">Klik di sini</a>
+                </div>
+
+                
+
                 <div class="my-3">
                   <input type="submit" value="Login" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                 </div>

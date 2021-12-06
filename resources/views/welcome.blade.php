@@ -39,18 +39,27 @@
                             {{-- <a class="nav-link" href="https://sites.google.com/view/ikh-buah-hati-kita/home?authuser=0">Profil</a> --}}
                             <a target="_blank" class="nav-link" href="https://tkit-buahhatikita.sch.id">Profil TKIT</a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="about.html">Daftar Akun</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('pendaftaran/create') }}">Pendaftaran</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('pembayaran/pembayaran') }}">Pembayaran</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary ml-lg-2" href="{{ url('login') }}">Login</a>
-                        </li>
+
+                        @if($sess != null)
+                        
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('pendaftaran/create') }}">Pendaftaran</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('pembayaran/pembayaran') }}">Pembayaran</a>
+                            </li>
+                            
+
+                        @else
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ url('/register') }}">Daftar Akun</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-primary ml-lg-2" href="{{ url('login') }}">Login</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
 
@@ -67,52 +76,11 @@
 
     </header>
 
-
-
-    <div class="page-section text-center" id="about">
-        <a href="{{ url('/register') }}" class="btn btn-success">Register Sekarang</a>
-        {{-- <div class="container">
-            <div class="col-12 grid-margin stretch-card"> --}}
-                {{-- @include('auths.register') --}}
-                {{-- <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">DAFTAR AKUN ORANG TUA/WALI</h4>
-                        <p class="card-description">
-                            isi data dengan benar
-                        </p>
-                        <form action="#" method="POST" class="forms-sample">
-                            @csrf
-                            <div class="form-group">
-                                <label for="exampleInputName1">Nama Orang Tua/Wali</label>
-                                <input name="nama" type="text" class="form-control" id="Nama" placeholder="Nama">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleTextarea1">Alamat Lengkap</label>
-                                <textarea name="#" class="form-control" id="exampleTextarea1" rows="4"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputName1">No. HP</label>
-                                <input name="nama" type="text" class="form-control" id="Nama" placeholder="No. HP">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputName1">Email</label>
-                                <input name="nama" type="email" class="form-control" id="Nama" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputName1">Pekerjaan</label>
-                                <input name="nama" type="text" class="form-control" id="Nama" placeholder="Pekerjaan">
-                            </div>
-                            <div class="row form-group mt-4">
-                                <div class="col-md-12">
-                                    <button type="submit" value="Send Message" class="btn btn-primary">Daftar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div> --}}
-            {{-- </div> <!-- .container -->
-        </div> --}}
-    </div><!-- .page-section -->
+    @if($sess == null)
+        <div class="page-section text-center" id="about">
+            <a href="{{ url('/register') }}" class="btn btn-success">Register Sekarang</a>
+        </div><!-- .page-section -->
+    @endif
 
     <!-- <footer class="page-footer bg-image" style="background-image: url(siswa/img/footer.png);"> -->
     <footer class="page-footer bg-image" style="background-image: url({{ asset('siswa/img/footer.png') }});">
