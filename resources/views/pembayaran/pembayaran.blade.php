@@ -30,7 +30,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
             <div class="container">
-                <a class="navbar-brand brand-logo mr-5" href="#"><img src={{asset("siswa/img/logo.png")}} class="mr-2"
+                <a class="navbar-brand brand-logo mr-5" href="{{ url('/') }}"><img src={{asset("siswa/img/logo.png")}} class="mr-2"
                         alt="logo" /></a>
 
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent"

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use\App\register;
-use\App\user;
+use \App\register;
+use \App\user;
 
 class registerController extends Controller
 {
@@ -26,16 +26,18 @@ class registerController extends Controller
      */
     public function create(Request $request)
     {
-        $user = new \App\user;
-        $user->role = 'calon';
-        $user->email = $request->email;
-        $user->name = $request->name;
-        $user->password = $request->password;
-        $user->save();
+        // $user = new \App\user;
+        // $user->role = 'calon';
+        // $user->email = $request->email;
+        // $user->name = $request->name;
+        // $user->password = $request->password;
+        // $user->save();
 
-        $request->request->add(['user_id'=>$user->id]);
-        $register=\App\register::create($request->all());
-        return redirect('register.register')->with('sukses','sukses');
+        // $request->request->add(['user_id'=>$user->id]);
+        // $register=\App\register::create($request->all());
+        // return redirect('register.register')->with('sukses','sukses');
+
+        return response()->json(['msg' => 'success']);
     }
 
     /**

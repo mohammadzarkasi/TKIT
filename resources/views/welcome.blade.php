@@ -102,7 +102,7 @@
                             </div>
                             <div class="row form-group mt-4">
                                 <div class="col-md-12">
-                                    <input type="submit" value="Send Message" class="btn btn-primary">
+                                    <button type="submit" value="Send Message" class="btn btn-primary">Daftar</button>
                                 </div>
                             </div>
                         </form>
@@ -112,10 +112,13 @@
         </div>
     </div><!-- .page-section -->
 
-    <footer class="page-footer bg-image" style="background-image: url(../siswa/img/footer.png);">
+    <!-- <footer class="page-footer bg-image" style="background-image: url(siswa/img/footer.png);"> -->
+    <footer class="page-footer bg-image" style="background-image: url({{ asset('siswa/img/footer.png') }});">
         <div class="container">
 
-            <p class="text-center" id="copyright">Copyright &copy; 2020. This template design and develop by <a href="https://macodeid.com/" target="_blank">MACode ID</a></p>
+            <p class="text-center" id="copyright">Copyright &copy; 2021. </p>
+                
+            <!-- This template design and develop by <a href="https://macodeid.com/" target="_blank">MACode ID</a></p> -->
         </div>
     </footer>
 
