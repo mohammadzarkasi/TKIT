@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\register;
-use \App\user;
+use \App\User;
+use Carbon\Carbon;
 
-class registerController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class registerController extends Controller
      */
     public function index()
     {
-        $data_register = \App\register::all();
-        return view('register.view',compact('data_register'));
+        // $data_register = \App\register::all();
+        return view('auths.register2');
     }
 
     /**
@@ -46,10 +47,31 @@ class registerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        \App\register::create($request->all());
-        return redirect('/');
+        // \App\register::create($request->all());
+        // return redirect('/');
+        $ts = Carbon::now();
+        $data = [
+            'name'          => $req->post('nama'),
+            'email'         => $req->post('email'),
+            'password'      => $req->post('password'),
+            'alamat'        => $req->post('alamat'),
+            'nomor_hp'      => $req->post('nomor_hp'),
+            'pekerjaan'     => $req->post('pekerjaan'),
+            'role'          => 'user',
+            'created_at'    => $ts,
+            'updated_at'    => $ts,
+        ];
+        User::insert($data);
+        // return 'hore';
+        // return view('auths.register_success');
+        return redirect('register-success');
+    }
+
+    public function success(Request $req)
+    {
+        return view('auths.register_success');
     }
 
     /**

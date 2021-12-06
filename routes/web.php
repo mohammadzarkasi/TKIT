@@ -13,7 +13,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\pendaftaranController;
-use App\Http\Controllers\registerController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -53,10 +53,13 @@ Route::get('pendaftaran', 'pendaftaranController@index');
 Route::get('pendaftaran/{id}/detail', 'pendaftaranController@detail');
 Route::get('pendaftaran/{id}/verifikasi', 'pendaftaranController@verifikasi');
 
-// Route::get('register/register', 'registerController@create');
-Route::get('register/register', [registerController::class, 'create']);
-Route::post('register/register', 'registerController@store');
-Route::get('register/view', 'registerController@index');
+// Route::get('register/register', 'RegisterController@create');
+Route::get('register/register', [RegisterController::class, 'create']);
+// Route::post('register/register', 'RegisterController@store');
+Route::post('register', [RegisterController::class, 'store']);
+// Route::get('register', 'RegisterController@index');
+Route::get('register', [RegisterController::class, 'index']);
+Route::get('register-success', [RegisterController::class, 'success']);
 
 
 Route::get('dasboards/viewdaftar', 'pendaftaranController@store');

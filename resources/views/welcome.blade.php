@@ -69,10 +69,12 @@
 
 
 
-    <div class="page-section" id="about">
-        <div class="container">
-            <div class="col-12 grid-margin stretch-card">
-                <div class="card">
+    <div class="page-section text-center" id="about">
+        <a href="{{ url('/register') }}" class="btn btn-success">Register Sekarang</a>
+        {{-- <div class="container">
+            <div class="col-12 grid-margin stretch-card"> --}}
+                {{-- @include('auths.register') --}}
+                {{-- <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">DAFTAR AKUN ORANG TUA/WALI</h4>
                         <p class="card-description">
@@ -107,9 +109,9 @@
                             </div>
                         </form>
                     </div>
-                </div>
-            </div> <!-- .container -->
-        </div>
+                </div> --}}
+            {{-- </div> <!-- .container -->
+        </div> --}}
     </div><!-- .page-section -->
 
     <!-- <footer class="page-footer bg-image" style="background-image: url(siswa/img/footer.png);"> -->

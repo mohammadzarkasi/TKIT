@@ -48,7 +48,7 @@
                   <input type="submit" value="Login" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  Belum daftar akun? <a href="{{ url('/register') }}" class="text-primary">Silahkan klik di sini</a>
+                  Belum punya akun? <a href="{{ url('/register') }}" class="text-primary">Silahkan daftar di sini</a>
                 </div>
                 <div class="text-center font-weight-light">
                   Atau kembali ke <a href="{{ url('/') }}" class="text-primary">Beranda</a>
