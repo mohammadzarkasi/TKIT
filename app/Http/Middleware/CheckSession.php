@@ -45,6 +45,11 @@ class CheckSession
         }
 
         $sess2 = json_decode($sess['extra'], true);
+
+        if (in_array($sess2['role'], ['user']) == false) {
+            return redirect('/login');
+        }
+
         $sess2['id_user'] = $sess['id_user'];
         $sess2['token'] = $sess['token'];
 
