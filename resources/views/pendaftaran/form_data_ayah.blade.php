@@ -1,4 +1,4 @@
-@extends('layouts.app2', ['sess' => $sess, 'title' => 'Isi Data Pribadi'])
+@extends('layouts.app2', ['sess' => $sess, 'title' => 'Isi Data Ayah Kandung'])
 
 @section('js')
 <script type='text/javascript' src="{{ asset('js/pendaftaran.js') }}"></script>

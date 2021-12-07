@@ -103,6 +103,11 @@ class PendaftaranController extends Controller
         return $this->get_form_pendaftaran($req, 'form_data_periodik');
     }
 
+    public function data_registrasi(Request $req)
+    {
+        return $this->get_form_pendaftaran($req, 'form_data_registrasi');
+    }
+
     private function save_data_pendaftaran(Request $req, $fields, $next)
     {
         $pembayaran = $this->cek_status_pembayaran($req);
@@ -130,6 +135,18 @@ class PendaftaranController extends Controller
             Pendaftaran::where('id', $pendaftaran['id'])->update($data);
         }
         return redirect('/pendaftaran/' . $next . '?bayar=' . $pembayaran['id']);
+    }
+
+    public function save_data_registrasi(Request $req)
+    {
+        $fields = [
+            'Jenis_Pendaftaran',
+            'No_Induk',
+            'Tanggal_Masuk',
+            'Sekolah_Sebelumnya',
+            'Masuk_Rombel',
+        ];
+        return $this->save_data_pendaftaran($req, $fields, 'data-keluar');
     }
 
     public function save_data_periodik(Request $req)

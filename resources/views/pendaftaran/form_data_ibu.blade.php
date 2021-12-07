@@ -1,4 +1,4 @@
-@extends('layouts.app2', ['sess' => $sess, 'title' => 'Isi Data Pribadi'])
+@extends('layouts.app2', ['sess' => $sess, 'title' => 'Isi Data Ibu Kandung'])
 
 @section('js')
 <script type='text/javascript' src="{{ asset('js/pendaftaran.js') }}"></script>
@@ -42,7 +42,7 @@
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">DATA AYAH KANDUNG</h4>
+                    <h4 class="card-title">DATA IBU KANDUNG</h4>
                     <form id="form-pendaftaran" action="{{ url('/pendaftaran/data-ibu?bayar=' . $id_bayar) }}" method="POST" class="forms-sample">
                         @csrf
                         <div class="form-group row">
