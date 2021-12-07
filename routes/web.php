@@ -30,7 +30,9 @@ Route::middleware('myguest')->group(function () {
 Route::middleware('loggedin')->group(function () {
     // Route::get('pembayaran', 'pembayaranController@index');
     // Route::post('pembayaran/pembayaran', 'pembayaranController@store');
-    Route::get('pembayaran', [PembayaranController::class, 'index']);
+    Route::get('pembayaran', [PembayaranController::class, 'semua']);
+    Route::get('pembayaran/baru', [PembayaranController::class, 'index']);
+    Route::get('pembayaran/success', [PembayaranController::class, 'success']);
     Route::post('pembayaran', [PembayaranController::class, 'store']);
 
     Route::get('pembayaran/pembayaran', 'pembayaranController@create');

@@ -23,6 +23,26 @@ class PembayaranController extends Controller
         // return view('pembayaran.view',compact('data_pembayaran'));
     }
 
+    public function success(Request $req)
+    {
+        return view('pembayaran.success', ['sess' => $req->sess]);
+    }
+
+    public function semua(Request $req)
+    {
+        $sess = $req->sess;
+        $id = $sess['id'];
+        $rows = Pembayaran::where([
+            'id_user' => $id,
+            ])
+            ->get()->toArray();
+            
+        return view('pembayaran.semua', [
+            'sess' => $req->sess, 
+            'rows' => $rows,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -72,6 +92,7 @@ class PembayaranController extends Controller
             'lampiran' => '',
             'created_at' => $ts,
             'updated_at' => $ts,
+            'id_user' => $id,
         ];
 
         $idBayar = Pembayaran::insertGetId($data);
