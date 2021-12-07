@@ -34,6 +34,7 @@ Route::middleware('loggedin')->group(function () {
     Route::get('pembayaran/baru', [PembayaranController::class, 'index']);
     Route::get('pembayaran/success', [PembayaranController::class, 'success']);
     Route::post('pembayaran', [PembayaranController::class, 'store']);
+    Route::post('pembayaran/hapus', [PembayaranController::class, 'hapus']);
 
     // Route::get('pembayaran/pembayaran', 'PembayaranController@create');
     // Route::get('pembayaran/view', 'PembayaranController@store');

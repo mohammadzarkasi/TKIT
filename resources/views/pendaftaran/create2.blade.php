@@ -870,7 +870,7 @@
                         </div>
                         <div class="row form-group mt-4">
                             <div class="col-md-12">
-                                <input type="submit" value="Send Message" class="btn btn-primary">
+                                <button type="submit" value="Send Message" class="btn btn-primary">Simpan</button>
                             </div>
                         </div>
                     </form>

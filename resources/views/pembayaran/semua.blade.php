@@ -1,9 +1,25 @@
 @extends('layouts.app2', ['sess' => $sess,'title' => 'Riwayat Pembayaran'])
 
+@section('js')
+    <script type="text/javascript" src="{{ asset('js/pembayaran.js') }}"></script>
+@endsection
+
 @section('content')
+<form id="mp-form"></form>
 <div class="content-wrapper">
     <div class="row">
         <div class="col-12 grid-margin " style="height: 500px">
+            @if(\Session::has('errmsg'))
+                <div class="alert alert-danger" role="alert">
+                    {{ \Session::get('errmsg') }}
+                </div>
+            @endif
+            
+            @if(\Session::has('msg'))
+                <div class="alert alert-success" role="alert">
+                    {{ \Session::get('msg') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     <h4>Riwayat Pembayaran</h4>
@@ -51,6 +67,9 @@
                                         <a class="btn btn-success" href="{{ url('/pembayaran/lihat?id=' . $row['id']) }}">Lihat</a>
                                         @if ($row['verifikasi'] == '2')
                                             <a class="btn btn-info" href="{{ url('/pendaftaran/baru?bayar=' . $row['id']) }}">Formulir Pendaftaran</a>
+                                        @endif
+                                        @if ($row['verifikasi'] == '1')
+                                            <button class="btn btn-danger" onclick="promptHapus({{ $row['id'] }})">Hapus</button>
                                         @endif
                                     </td>
                                 </tr>

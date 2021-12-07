@@ -86,6 +86,7 @@
 
     <script>
         var base_url = '{{ url('/') }}';
+        var ___csrf = '{{ csrf_token() }}';
     </script>
 
     <script src={{asset("siswa/js/jquery-3.5.1.min.js")}}></script>
@@ -98,6 +99,8 @@
 
     <script src={{asset("siswa/js/theme.js")}}></script>
     <script src={{asset("js/common.js")}}></script>
+
+    @yield('js')
     
 </body>
 </html>

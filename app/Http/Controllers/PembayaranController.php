@@ -34,11 +34,11 @@ class PembayaranController extends Controller
         $id = $sess['id'];
         $rows = Pembayaran::where([
             'id_user' => $id,
-            ])
+        ])
             ->get()->toArray();
-            
+
         return view('pembayaran.semua', [
-            'sess' => $req->sess, 
+            'sess' => $req->sess,
             'rows' => $rows,
         ]);
     }
@@ -79,7 +79,7 @@ class PembayaranController extends Controller
 
         $sess = $req->sess;
         $id = $sess['id'];
-        
+
 
         // $berkas->move($tujuan_upload, )
 
@@ -97,9 +97,15 @@ class PembayaranController extends Controller
 
         $idBayar = Pembayaran::insertGetId($data);
 
-        $tujuan_upload = public_path() .  '/uploads/' . date('Y') . '/' . date('m') . '/' . date('d') . '/bayar/' . $id . '/';
+        $folder_upload = '/uploads/' . date('Y') . '/' . date('m') . '/' . date('d') . '/bayar/' . $id . '/';
+        $tujuan_upload = public_path() .  $folder_upload;
+        $file_tujuan = $idBayar . '_' . $berkas->getClientOriginalName();
 
-        $berkas->move($tujuan_upload, $idBayar . '_' . $berkas->getClientOriginalName());
+        $moved = $berkas->move($tujuan_upload, $file_tujuan);
+
+        Pembayaran::where('id', $idBayar)->update([
+            'lampiran' => $folder_upload . $file_tujuan,
+        ]);
 
         // echo $idBayar;
         return redirect('/pembayaran/success');
@@ -145,9 +151,28 @@ class PembayaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function hapus(Request $req)
     {
-        //
+        $id = $req->post('id');
+        $sess = $req->sess;
+
+        $items = Pembayaran::where('id', $id)->get()->toArray();
+
+        if (count($items) == 0) {
+            return redirect()->back()->with('errmsg', 'data tidak ditemukan');
+        }
+        $item = $items[0];
+
+        if ($item['id_user'] != $sess['id']) {
+            return redirect()->back()->with('errmsg', 'tidak dapat menghapus data milik orang lain');
+        }
+
+        if ($item['verifikasi'] != '1') {
+            return redirect()->back()->with('errmsg', 'data pembayaran tidak dapat dihapus karena sudah diverifikasi');
+        }
+
+        Pembayaran::where('id', $id)->delete();
+        return redirect()->back()->with('msg', 'data berhasil dihapus');
     }
 
     public function verifikasi($id)
