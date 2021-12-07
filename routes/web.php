@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
@@ -74,48 +75,20 @@ Route::middleware('loggedin')->group(function () {
     Route::get('pendaftaran/export', 'PendaftaranController@export');
 });
 
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Route::get('/login', 'AuthController@login')->name('login');
-// Route::post('/postlogin','AuthController@postlogin');
 Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login', [AuthController::class, 'postlogin']);
-
-
-// Route::get('/logout', 'AuthController@logout');
-
-// Route::get('register/register', 'RegisterController@create');
-Route::get('register/register', [RegisterController::class, 'create']);
-// Route::post('register/register', 'RegisterController@store');
 Route::post('register', [RegisterController::class, 'store']);
-// Route::get('register', 'RegisterController@index');
 Route::get('register', [RegisterController::class, 'index']);
 Route::get('register-success', [RegisterController::class, 'success']);
+// Route::get('verifikasi/pendaftaran', 'verifikasiController@index');
+// Route::get('dasboards/viewdaftar', 'pendaftaranController@store');
 
-// Route::get('pendaftaran','pendaftaranController@index');
-
-
-Route::get('verifikasi/pendaftaran', 'verifikasiController@index');
-
-//Route::get('dashboards/view', 'pendaftaranController@store');
-
-
-
-// Route::get('pendaftaran/index', 'pendaftaranController@store');
-// Route::get('pendaftaran', 'pendaftaranController@index');
-// Route::get('pendaftaran/{id}/detail', 'pendaftaranController@detail');
-// Route::get('pendaftaran/{id}/verifikasi', 'pendaftaranController@verifikasi');
-
-
-
-
-Route::get('dasboards/viewdaftar', 'pendaftaranController@store');
-
-// Route::group(['middleware' => 'auth'], function () {
-// });
 
     //Route::post('/create','pendaftaranController@store');
     //Route::get('ppdb','Ppdb_controller@index');
     //Route::post('ppdb','Ppdb_controller@store');
+
+Route::prefix('admin')->group(function(){
+    Route::get('/', [AdminAuthController::class, 'index']);
+    Route::post('/', [AdminAuthController::class, 'do_login']);
+});
