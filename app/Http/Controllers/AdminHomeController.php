@@ -8,6 +8,6 @@ class AdminHomeController extends Controller
 {
     public function index(Request $req)
     {
-        return view('admin.home');
+        return view('admin.home', ['sess' => $req->sess]);
     }
 }
