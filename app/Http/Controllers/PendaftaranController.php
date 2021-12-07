@@ -59,27 +59,70 @@ class PendaftaranController extends Controller
         return $pembayaran;
     }
 
+    private function get_pendaftaran($pembayaran)
+    {
+        $list_pendaftaran = Pendaftaran::where('id_bayar', $pembayaran['id'])->get()->toArray();
+        if (count($list_pendaftaran) > 0) {
+            return $list_pendaftaran[0];
+        }
+        return null;
+    }
+
     public function data_pribadi(Request $req)
     {
         $pembayaran = $this->cek_status_pembayaran($req);
         if ($pembayaran == null) {
             return redirect('/pendaftaran/bayar-tidak-valid');
         }
-        // $id_bayar = $req->input('bayar');
-        // $list_pembayaran = Pembayaran::where('id', $id_bayar)->get()->toArray();
-        // if (count($list_pembayaran) < 1) {
-        //     return redirect('/pendaftaran/bayar-tidak-valid');
+        // $list_pendaftaran = Pendaftaran::where('id_bayar', $pembayaran['id'])->get()->toArray();
+        // $data = [];
+        // if (count($list_pendaftaran) > 0) {
+        //     $data = $list_pendaftaran[0];
         // }
-        // $pembayaran = $list_pembayaran[0];
-        // if (in_array($pembayaran['verifikasi'], ['2']) == false) {
-        //     return redirect('/pendaftaran/bayar-tidak-valid');
-        // }
-        $list_pendaftaran = Pendaftaran::where('id_bayar', $pembayaran['id'])->get()->toArray();
-        $data = [];
-        if (count($list_pendaftaran) > 0) {
-            $data = $list_pendaftaran[0];
+        $data = $this->get_pendaftaran($pembayaran);
+        return view('pendaftaran.form_data_pribadi', ['sess' => $req->sess, 'id_bayar' => $pembayaran['id'], 'data' => $data ?? []]);
+    }
+
+    public function data_ayah(Request $req)
+    {
+        $pembayaran = $this->cek_status_pembayaran($req);
+        if ($pembayaran == null) {
+            return redirect('/pendaftaran/bayar-tidak-valid');
         }
-        return view('pendaftaran.form_data_pribadi', ['sess' => $req->sess, 'id_bayar' => $pembayaran['id'], 'data' => $data]);
+        $data = $this->get_pendaftaran($pembayaran);
+        return view('pendaftaran.form_data_ayah', ['sess' => $req->sess, 'id_bayar' => $pembayaran['id'], 'data' => $data ?? []]);
+    }
+
+    public function save_data_ayah(Request $req)
+    {
+        $pembayaran = $this->cek_status_pembayaran($req);
+        if ($pembayaran == null) {
+            return redirect('/pendaftaran/bayar-tidak-valid');
+        }
+        $pendaftaran = $this->get_pendaftaran($pembayaran);
+        $sess = $req->sess;
+        $data = [
+            'Nama_Ayah' => $req->post('Nama_Ayah'),
+            'NIK_Ayah' => $req->post('NIK_Ayah'),
+            'Tanggal_Lahir_Ayah' => $req->post('Tanggal_Lahir_Ayah'),
+            'Pendidikan_Ayah' => $req->post('Pendidikan_Ayah'),
+            'Pekerjaan_Ayah' => $req->post('Pekerjaan_Ayah'),
+            'Penghasilan_Ayah' => $req->post('Penghasilan_Ayah'),
+            'Berkebutuhan_Khusus_Ayah' => $req->post('Berkebutuhan_Khusus_Ayah'),
+            'id_user' => $sess['id'],
+            'id_bayar' => $pembayaran['id'],
+        ];
+        if ($pendaftaran==null) {
+            $ts = Carbon::now();
+            $data['created_at'] = $ts;
+            $data['updated_at'] = $ts;
+            Pendaftaran::insert($data);
+        } else {
+            $ts = Carbon::now();
+            $data['updated_at'] = $ts;
+            Pendaftaran::where('id', $pendaftaran['id'])->update($data);
+        }
+        return redirect('/pendaftaran/data-ibu?bayar=' . $pembayaran['id']);
     }
 
     public function save_data_pribadi(Request $req)

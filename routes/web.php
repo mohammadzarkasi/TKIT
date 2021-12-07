@@ -48,6 +48,8 @@ Route::middleware('loggedin')->group(function () {
     Route::get('pendaftaran/bayar-tidak-valid', [PendaftaranController::class, 'bayar_tidak_valid']);
     Route::get('pendaftaran/data-pribadi', [PendaftaranController::class, 'data_pribadi']);
     Route::post('pendaftaran/data-pribadi', [PendaftaranController::class, 'save_data_pribadi']);
+    Route::get('pendaftaran/data-ayah', [PendaftaranController::class, 'data_ayah']);
+    Route::post('pendaftaran/data-ayah', [PendaftaranController::class, 'save_data_ayah']);
     Route::post('pendaftaran/create', 'pendaftaranController@store');
     Route::get('pendaftaran/export', 'pendaftaranController@export');
 });
