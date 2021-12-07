@@ -44,7 +44,7 @@
                         
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('pendaftaran/create') }}">Pendaftaran</a>
+                                <a class="nav-link" href="{{ url('pendaftaran') }}">Pendaftaran</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('pembayaran') }}">Pembayaran</a>

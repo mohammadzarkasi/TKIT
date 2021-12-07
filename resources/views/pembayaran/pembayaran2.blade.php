@@ -1,4 +1,4 @@
-@extends('layouts.app2', ['sess'=>$sess, 'title' => 'Pembayaran'])
+@extends('layouts.app2', ['sess'=>$sess, 'title' => 'Pembayaran Baru'])
 
 @section('content')
 <div class="content-wrapper">

@@ -14,7 +14,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\pendaftaranController;
+use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,9 +35,16 @@ Route::middleware('loggedin')->group(function () {
     Route::get('pembayaran/success', [PembayaranController::class, 'success']);
     Route::post('pembayaran', [PembayaranController::class, 'store']);
 
-    Route::get('pembayaran/pembayaran', 'pembayaranController@create');
-    Route::get('pembayaran/view', 'pembayaranController@store');
-    Route::get('pembayaran/{id}/verifikasi', 'pembayaranController@verifikasi');
+    // Route::get('pembayaran/pembayaran', 'PembayaranController@create');
+    // Route::get('pembayaran/view', 'PembayaranController@store');
+    // Route::get('pembayaran/{id}/verifikasi', 'pembayaranController@verifikasi');
+
+    Route::get('pendaftaran', [PendaftaranController::class, 'index']);
+    Route::get('pendaftaran/bayar-dulu', [PendaftaranController::class, 'bayar_dulu']);
+    // Route::get('pendaftaran/create', 'pendaftaranController@create');
+    Route::get('pendaftaran/baru', [PendaftaranController::class, 'create']);
+    Route::post('pendaftaran/create', 'pendaftaranController@store');
+    Route::get('pendaftaran/export', 'pendaftaranController@export');
 });
 
 // Auth::routes();
@@ -61,10 +68,7 @@ Route::get('register', [RegisterController::class, 'index']);
 Route::get('register-success', [RegisterController::class, 'success']);
 
 // Route::get('pendaftaran','pendaftaranController@index');
-Route::get('pendaftaran', [pendaftaranController::class, 'index']);
-Route::get('pendaftaran/create', 'pendaftaranController@create');
-Route::post('pendaftaran/create', 'pendaftaranController@store');
-Route::get('pendaftaran/export', 'pendaftaranController@export');
+
 
 Route::get('verifikasi/pendaftaran', 'verifikasiController@index');
 
@@ -72,10 +76,10 @@ Route::get('verifikasi/pendaftaran', 'verifikasiController@index');
 
 
 
-Route::get('pendaftaran/index', 'pendaftaranController@store');
-Route::get('pendaftaran', 'pendaftaranController@index');
-Route::get('pendaftaran/{id}/detail', 'pendaftaranController@detail');
-Route::get('pendaftaran/{id}/verifikasi', 'pendaftaranController@verifikasi');
+// Route::get('pendaftaran/index', 'pendaftaranController@store');
+// Route::get('pendaftaran', 'pendaftaranController@index');
+// Route::get('pendaftaran/{id}/detail', 'pendaftaranController@detail');
+// Route::get('pendaftaran/{id}/verifikasi', 'pendaftaranController@verifikasi');
 
 
 

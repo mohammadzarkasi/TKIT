@@ -43,14 +43,14 @@
                             @endphp
                                 <tr>
                                     <td>{{ $counter }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($row['created_at'])->locale('id_ID')->format('d M Y, H:i') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($row['created_at'])->addHours(7)->format('d M Y, H:i') }}</td>
                                     <td>{{ $row['bank'] }}</td>
                                     <td>{{ $row['nama'] }}</td>
                                     <td>{{ $status_verifikasi }}</td>
                                     <td>
                                         <a class="btn btn-success" href="{{ url('/pembayaran/lihat?id=' . $row['id']) }}">Lihat</a>
                                         @if ($row['verifikasi'] == '2')
-                                            <a class="btn btn-info" href="{{ url('/pendaftaran/formulir?bayar=' . $row['id']) }}">Formulir Pendaftaran</a>
+                                            <a class="btn btn-info" href="{{ url('/pendaftaran/baru?bayar=' . $row['id']) }}">Formulir Pendaftaran</a>
                                         @endif
                                     </td>
                                 </tr>

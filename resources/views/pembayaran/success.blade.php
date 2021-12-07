@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body">
                     <p>Pembayaran berhasil disimpan. Mohon tunggu konfirmasi dari Admin untuk dapat melanjutkan pendaftaran.</p>
-                    <a href="{{ url('/pembayaran') }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ url('/pembayaran') }}" class="btn btn-primary">Lihat Data Pembayaran</a>
                 </div>
             </div>
         </div>
