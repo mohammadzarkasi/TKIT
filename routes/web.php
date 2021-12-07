@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\RegisterController;
+use App\Pendaftaran;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -44,6 +45,9 @@ Route::middleware('loggedin')->group(function () {
     Route::get('pendaftaran/bayar-dulu', [PendaftaranController::class, 'bayar_dulu']);
     // Route::get('pendaftaran/create', 'pendaftaranController@create');
     Route::get('pendaftaran/baru', [PendaftaranController::class, 'create']);
+    Route::get('pendaftaran/bayar-tidak-valid', [PendaftaranController::class, 'bayar_tidak_valid']);
+    Route::get('pendaftaran/data-pribadi', [PendaftaranController::class, 'data_pribadi']);
+    Route::post('pendaftaran/data-pribadi', [PendaftaranController::class, 'save_data_pribadi']);
     Route::post('pendaftaran/create', 'pendaftaranController@store');
     Route::get('pendaftaran/export', 'pendaftaranController@export');
 });

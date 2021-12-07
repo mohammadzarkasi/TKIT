@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pendaftaran extends Model
 {
-    protected $table = 'pendaftaran';
+    protected $table = 'pendaftaran2';
     protected $primaryKey='id';
     protected $fillable = [
         'id','Nama_Lengkap','Jenis_Kelamin','NISN','NIK','Tempat_Lahir','Tanggal_Lahir','No_Regis_Akta','Agama','Kewarganegaraan',

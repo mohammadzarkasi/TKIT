@@ -66,7 +66,7 @@
                                     <td>
                                         <a class="btn btn-success" href="{{ url('/pembayaran/lihat?id=' . $row['id']) }}">Lihat</a>
                                         @if ($row['verifikasi'] == '2')
-                                            <a class="btn btn-info" href="{{ url('/pendaftaran/baru?bayar=' . $row['id']) }}">Formulir Pendaftaran</a>
+                                            <a class="btn btn-info" href="{{ url('/pendaftaran/data-pribadi?bayar=' . $row['id']) }}">Formulir Pendaftaran</a>
                                         @endif
                                         @if ($row['verifikasi'] == '1')
                                             <button class="btn btn-danger" onclick="promptHapus({{ $row['id'] }})">Hapus</button>
