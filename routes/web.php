@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminHomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
@@ -89,6 +90,13 @@ Route::get('register-success', [RegisterController::class, 'success']);
     //Route::post('ppdb','Ppdb_controller@store');
 
 Route::prefix('admin')->group(function(){
-    Route::get('/', [AdminAuthController::class, 'index']);
-    Route::post('/', [AdminAuthController::class, 'do_login']);
+    Route::middleware('admin-guest')->group(function(){
+        Route::get('/', [AdminAuthController::class, 'index']);
+        Route::post('/', [AdminAuthController::class, 'do_login']);
+    });
+
+
+    Route::middleware('admin-beneran')->group(function(){
+        Route::get('/home', [AdminHomeController::class, 'index']);
+    });
 });
