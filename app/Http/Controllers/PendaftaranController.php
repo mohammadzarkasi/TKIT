@@ -68,32 +68,37 @@ class PendaftaranController extends Controller
         return null;
     }
 
-    public function data_pribadi(Request $req)
+    private function get_form_pendaftaran(Request $req, $view)
     {
         $pembayaran = $this->cek_status_pembayaran($req);
         if ($pembayaran == null) {
             return redirect('/pendaftaran/bayar-tidak-valid');
         }
-        // $list_pendaftaran = Pendaftaran::where('id_bayar', $pembayaran['id'])->get()->toArray();
-        // $data = [];
-        // if (count($list_pendaftaran) > 0) {
-        //     $data = $list_pendaftaran[0];
-        // }
         $data = $this->get_pendaftaran($pembayaran);
-        return view('pendaftaran.form_data_pribadi', ['sess' => $req->sess, 'id_bayar' => $pembayaran['id'], 'data' => $data ?? []]);
+        return view('pendaftaran.' . $view, ['sess' => $req->sess, 'id_bayar' => $pembayaran['id'], 'data' => $data ?? []]);
+    }
+
+    public function data_pribadi(Request $req)
+    {
+        return $this->get_form_pendaftaran($req, 'form_data_pribadi');
     }
 
     public function data_ayah(Request $req)
     {
-        $pembayaran = $this->cek_status_pembayaran($req);
-        if ($pembayaran == null) {
-            return redirect('/pendaftaran/bayar-tidak-valid');
-        }
-        $data = $this->get_pendaftaran($pembayaran);
-        return view('pendaftaran.form_data_ayah', ['sess' => $req->sess, 'id_bayar' => $pembayaran['id'], 'data' => $data ?? []]);
+        return $this->get_form_pendaftaran($req, 'form_data_ayah');
     }
 
-    public function save_data_ayah(Request $req)
+    public function data_ibu(Request $req)
+    {
+        return $this->get_form_pendaftaran($req, 'form_data_ibu');
+    }
+
+    public function data_wali(Request $req)
+    {
+        return $this->get_form_pendaftaran($req, 'form_data_wali');
+    }
+
+    private function save_data_pendaftaran(Request $req, $fields, $next)
     {
         $pembayaran = $this->cek_status_pembayaran($req);
         if ($pembayaran == null) {
@@ -102,17 +107,14 @@ class PendaftaranController extends Controller
         $pendaftaran = $this->get_pendaftaran($pembayaran);
         $sess = $req->sess;
         $data = [
-            'Nama_Ayah' => $req->post('Nama_Ayah'),
-            'NIK_Ayah' => $req->post('NIK_Ayah'),
-            'Tanggal_Lahir_Ayah' => $req->post('Tanggal_Lahir_Ayah'),
-            'Pendidikan_Ayah' => $req->post('Pendidikan_Ayah'),
-            'Pekerjaan_Ayah' => $req->post('Pekerjaan_Ayah'),
-            'Penghasilan_Ayah' => $req->post('Penghasilan_Ayah'),
-            'Berkebutuhan_Khusus_Ayah' => $req->post('Berkebutuhan_Khusus_Ayah'),
             'id_user' => $sess['id'],
             'id_bayar' => $pembayaran['id'],
         ];
-        if ($pendaftaran==null) {
+        foreach ($fields as $f) {
+            $data[$f] = $req->post($f);
+        }
+
+        if ($pendaftaran == null) {
             $ts = Carbon::now();
             $data['created_at'] = $ts;
             $data['updated_at'] = $ts;
@@ -122,7 +124,51 @@ class PendaftaranController extends Controller
             $data['updated_at'] = $ts;
             Pendaftaran::where('id', $pendaftaran['id'])->update($data);
         }
-        return redirect('/pendaftaran/data-ibu?bayar=' . $pembayaran['id']);
+        return redirect('/pendaftaran/' . $next . '?bayar=' . $pembayaran['id']);
+    }
+
+    public function save_data_wali(Request $req)
+    {
+        $fields = [
+            'Nama_Wali',
+            'NIK_Wali',
+            'Tanggal_Lahir_Wali',
+            'Pendidikan_Wali',
+            'Pekerjaan_Wali',
+            'Penghasilan_Wali',
+            'No_Tlp_Rumah',
+            'No_HP',
+            'email',
+        ];
+        return $this->save_data_pendaftaran($req, $fields, 'data-periodik');
+    }
+
+    public function save_data_ibu(Request $req)
+    {
+        $fields = [
+            'Nama_Ibu',
+            'NIK_Ibu',
+            'Tanggal_Lahir_Ibu',
+            'Pendidikan_Ibu',
+            'Pekerjaan_Ibu',
+            'Penghasilan_Ibu',
+            'Berkebutuhan_Khusus_Ibu',
+        ];
+        return $this->save_data_pendaftaran($req, $fields, 'data-wali');
+    }
+
+    public function save_data_ayah(Request $req)
+    {
+        $fields = [
+            'Nama_Ayah',
+            'NIK_Ayah',
+            'Tanggal_Lahir_Ayah',
+            'Pendidikan_Ayah',
+            'Pekerjaan_Ayah',
+            'Penghasilan_Ayah',
+            'Berkebutuhan_Khusus_Ayah',
+        ];
+        return $this->save_data_pendaftaran($req, $fields, 'data-ibu');
     }
 
     public function save_data_pribadi(Request $req)

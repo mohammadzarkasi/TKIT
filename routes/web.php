@@ -46,10 +46,28 @@ Route::middleware('loggedin')->group(function () {
     // Route::get('pendaftaran/create', 'pendaftaranController@create');
     Route::get('pendaftaran/baru', [PendaftaranController::class, 'create']);
     Route::get('pendaftaran/bayar-tidak-valid', [PendaftaranController::class, 'bayar_tidak_valid']);
+
     Route::get('pendaftaran/data-pribadi', [PendaftaranController::class, 'data_pribadi']);
     Route::post('pendaftaran/data-pribadi', [PendaftaranController::class, 'save_data_pribadi']);
+    
     Route::get('pendaftaran/data-ayah', [PendaftaranController::class, 'data_ayah']);
     Route::post('pendaftaran/data-ayah', [PendaftaranController::class, 'save_data_ayah']);
+    
+    Route::get('pendaftaran/data-ibu', [PendaftaranController::class, 'data_ibu']);
+    Route::post('pendaftaran/data-ibu', [PendaftaranController::class, 'save_data_ibu']);
+    
+    Route::get('pendaftaran/data-wali', [PendaftaranController::class, 'data_wali']);
+    Route::post('pendaftaran/data-wali', [PendaftaranController::class, 'save_data_wali']);
+
+    Route::get('pendaftaran/data-periodik', [PendaftaranController::class, 'data_periodik']);
+    Route::post('pendaftaran/data-periodik', [PendaftaranController::class, 'save_data_periodik']);
+
+    Route::get('pendaftaran/data-registrasi', [PendaftaranController::class, 'data_registrasi']);
+    Route::post('pendaftaran/data-registrasi', [PendaftaranController::class, 'save_data_registrasi']);
+
+    Route::get('pendaftaran/data-keluar', [PendaftaranController::class, 'data_keluar']);
+    Route::post('pendaftaran/data-keluar', [PendaftaranController::class, 'save_data_keluar']);
+    
     Route::post('pendaftaran/create', 'pendaftaranController@store');
     Route::get('pendaftaran/export', 'pendaftaranController@export');
 });

@@ -91,7 +91,7 @@ class CreateTablePendaftaran2 extends Migration
             $table->enum('Pendidikan_Wali', ['Tidak sekolah', 'Putus SD', 'SD', 'SMP', 'SMA', 'D1', 'D2', 'D3', 'D4/S1', 'S2', 'S3'])->nullable();
             $table->enum('Pekerjaan_Wali', [
                 'tidak bekerja', 'Nelayan', 'Petani', 'PNS/TNI/POLRI', 'Karyawan Swasta',
-                'Pedagang Kecil', 'Pedagang besar', 'wiraswasta', 'wirausaha', 'buruh, pensiunan', 'meninggal dunia', 'lainnya'
+                'Pedagang Kecil', 'Pedagang besar', 'wiraswasta', 'wirausaha', 'buruh', 'pensiunan', 'meninggal dunia', 'lainnya'
             ])->nullable();
             $table->enum('Penghasilan_Wali', [
                 'kurang_500.000', '500.000-999.999', '1juta-1.999.999',

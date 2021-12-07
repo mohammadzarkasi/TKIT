@@ -19,13 +19,13 @@
                         <a class="nav-link" aria-current="page" href="{{ url('/pendaftaran/data-pribadi?bayar=' . $id_bayar) }}">Data Pribadi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ url('/pendaftaran/data-ayah?bayar=' . $id_bayar) }}">Data Ayah Kandung</a>
+                        <a class="nav-link" href="{{ url('/pendaftaran/data-ayah?bayar=' . $id_bayar) }}">Data Ayah Kandung</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/pendaftaran/data-ibu?bayar=' . $id_bayar) }}">Data Ibu Kandung</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/pendaftaran/data-wali?bayar=' . $id_bayar) }}">Data Wali</a>
+                        <a class="nav-link active" href="{{ url('/pendaftaran/data-wali?bayar=' . $id_bayar) }}">Data Wali</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/pendaftaran/data-periodik?bayar=' . $id_bayar) }}">Data Periodik</a>
@@ -43,31 +43,31 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">DATA AYAH KANDUNG</h4>
-                    <form id="form-pendaftaran" action="{{ url('/pendaftaran/data-ayah?bayar=' . $id_bayar) }}" method="POST" class="forms-sample">
+                    <form id="form-pendaftaran" action="{{ url('/pendaftaran/data-wali?bayar=' . $id_bayar) }}" method="POST" class="forms-sample">
                         @csrf
                         <div class="form-group row">
-                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nama Ayah Kandung</label>
+                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nama Wali</label>
                             <div class="col-sm-9">
-                                <input input name="Nama_Ayah" type="text" class="form-control" id="exampleInputUsername2" ##placeholder="Nama Ayah">
+                                <input input name="Nama_Wali" type="text" class="form-control" id="exampleInputUsername2" #placeholder="Nama Ibu">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">NIK Ayah</label>
+                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">NIK</label>
                             <div class="col-sm-9">
-                                <input input name="NIK_Ayah" type="text" class="form-control" id="exampleInputUsername2" #placeholder="NIK">
+                                <input input name="NIK_Wali" type="text" class="form-control" id="exampleInputUsername2" #placeholder="NIK">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Tanggal
                                 Lahir</label>
                             <div class="col-sm-9">
-                                <input input name="Tanggal_Lahir_Ayah" type="date" class="form-control" id="exampleInputUsername2" #placeholder="Tanggal Lahir">
+                                <input input name="Tanggal_Lahir_Wali" type="date" class="form-control" id="exampleInputUsername2" #placeholder="Tanggal Lahir">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label" for="exampleInputUsername2">Pendidikan</label>
                             <div class="col-sm-9">
-                                <select name="Pendidikan_Ayah" class="form-control" id="exampleSelectGender">
+                                <select name="Pendidikan_Wali" class="form-control" id="exampleSelectGender">
                                     <option value="Tidak sekolah">Tidak Sekolah</option>
                                     <option value="Putus SD">Putus SD</option>
                                     <option value="SD">SD Sederajat</option>
@@ -85,7 +85,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label" for="exampleInputUsername2">Pekerjaan</label>
                             <div class="col-sm-9">
-                                <select name="Pekerjaan_Ayah" class="form-control" id="exampleSelectGender">
+                                <select name="Pekerjaan_Wali" class="form-control" id="exampleSelectGender">
                                     <option value="tidak bekerja">Tidak Bekerja</option>
                                     <option value="Nelayan">Nelayan</option>
                                     <option value="Petani">Petani</option>
@@ -106,7 +106,7 @@
                             <label class="col-sm-3 col-form-label" for="exampleInputUsername2">Penghasilan
                                 Bulanan</label>
                             <div class="col-sm-9">
-                                <select name="Penghasilan_Ayah" class="form-control" id="exampleSelectGender">
+                                <select name="Penghasilan_Wali" class="form-control" id="exampleSelectGender">
                                     <option value="kurang_500.000">Kurang dari Rp.500.000</option>
                                     <option value="500.000-999.999">Rp.500.000 - Rp.999.999</option>
                                     <option value="1juta-1.999.999">1 juta - Rp.1.999.999</option>
@@ -117,30 +117,24 @@
                                 </select>
                             </div>
                         </div>
+                        <h4 class="card-title">KONTAK</h4>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label" for="exampleInputUsername2">Berkebutuhan
-                                Khusus</label>
+                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nomor telepon
+                                Rumah</label>
                             <div class="col-sm-9">
-                                <select name="Berkebutuhan_Khusus_Ayah" class="form-control" id="exampleSelectGender">
-                                    <option value="Tidak">Tidak</option>
-                                    <option value="Netra">Netra</option>
-                                    <option value="Rungu">Rungu</option>
-                                    <option value="Grahita_ringan">Grahita Ringan</option>
-                                    <option value="Grahita_Sedang">Grahita Sedang</option>
-                                    <option value="Daksa_Ringan">Daksa Ringan</option>
-                                    <option value="Daksa_Sedang">Daksa Sedang</option>
-                                    <option value="Laras">Larasa</option>
-                                    <option value="Wicara">Wicara</option>
-                                    <option value="Tuna_ganda">Tuna Ganda</option>
-                                    <option value="Hiper_aktif">Hiper Aktif</option>
-                                    <option value="Cerdas_Isimewa">Cerdas Isimewa</option>
-                                    <option value="Bakat_Istimewa">Bakat Istimewa</option>
-                                    <option value="Kesulitan_Belajra">Kesulitan Belajar</option>
-                                    <option value="Narkoba">Narkoba</option>
-                                    <option value="Indigo">Indigo</option>
-                                    <option value="Down_Sindrome">Down Sindrome</option>
-                                    <option value="Autis">Autis</option>
-                                </select>
+                                <input input name="No_Tlp_Rumah" type="text" class="form-control" id="exampleInputUsername2" #placeholder="Nama Ibu">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nomor HP</label>
+                            <div class="col-sm-9">
+                                <input input name="No_HP" type="text" class="form-control" id="exampleInputUsername2" #placeholder="NIK">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input input name="email" type="text" class="form-control" id="exampleInputUsername2" #placeholder="NIK">
                             </div>
                         </div>
 
@@ -149,7 +143,6 @@
                                 <button type="submit" value="Send Message" class="btn btn-primary">Simpan</button>
                             </div>
                         </div>
-
 
                     </form>
                 </div>
