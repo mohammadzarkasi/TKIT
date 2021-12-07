@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index(Request $req)
     {
         
-        return view('welcome', [
+        return view('welcome2', [
             'sess' => $req->sess,
         ]);
     }

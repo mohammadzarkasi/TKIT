@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\pendaftaranController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('myguest')->group(function () {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/logout', [AuthController::class, 'logout']);
+});
+
+Route::middleware('loggedin')->group(function () {
+    // Route::get('pembayaran', 'pembayaranController@index');
+    // Route::post('pembayaran/pembayaran', 'pembayaranController@store');
+    Route::get('pembayaran', [PembayaranController::class, 'index']);
+    Route::post('pembayaran', [PembayaranController::class, 'store']);
+
+    Route::get('pembayaran/pembayaran', 'pembayaranController@create');
+    Route::get('pembayaran/view', 'pembayaranController@store');
+    Route::get('pembayaran/{id}/verifikasi', 'pembayaranController@verifikasi');
 });
 
 // Auth::routes();
@@ -56,13 +68,7 @@ Route::get('verifikasi/pendaftaran', 'verifikasiController@index');
 
 //Route::get('dashboards/view', 'pendaftaranController@store');
 
-Route::get('pembayaran', 'pembayaranController@index');
 
-Route::get('pembayaran/pembayaran', 'pembayaranController@create');
-Route::post('pembayaran/pembayaran', 'pembayaranController@store');
-Route::get('pembayaran/view', 'pembayaranController@store');
-Route::get('pembayaran', 'pembayaranController@index');
-Route::get('pembayaran/{id}/verifikasi', 'pembayaranController@verifikasi');
 
 Route::get('pendaftaran/index', 'pendaftaranController@store');
 Route::get('pendaftaran', 'pendaftaranController@index');
@@ -74,8 +80,8 @@ Route::get('pendaftaran/{id}/verifikasi', 'pendaftaranController@verifikasi');
 
 Route::get('dasboards/viewdaftar', 'pendaftaranController@store');
 
-Route::group(['middleware' => 'auth'], function () {
-});
+// Route::group(['middleware' => 'auth'], function () {
+// });
 
     //Route::post('/create','pendaftaranController@store');
     //Route::get('ppdb','Ppdb_controller@index');

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="copyright" content="MACode ID, https://macodeid.com/">
     <link rel="shortcut icon" href={{asset("assets/images/favicon2.jpg")}} />
-    <title>Pendaftaran TKIT</title>
+    <title>{{ $title ?? '' }} - TKIT Buah Hati Kita</title>
 
     <link rel="stylesheet" href={{asset("siswa/css/maicons.css")}}>
 
@@ -47,7 +47,7 @@
                                 <a class="nav-link" href="{{ url('pendaftaran/create') }}">Pendaftaran</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('pembayaran/pembayaran') }}">Pembayaran</a>
+                                <a class="nav-link" href="{{ url('pembayaran') }}">Pembayaran</a>
                             </li>
 
                             <li class="nav-item">
@@ -72,19 +72,7 @@
 
     </header>
 
-    <div id="home" class="slider">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src={{asset("siswa/img/akun.png")}}>
-            </div>
-        </div>
-    </div>
-
-    @if($sess == null)
-        <div class="page-section text-center" id="about">
-            <a href="{{ url('/register') }}" class="btn btn-success">Register Sekarang</a>
-        </div><!-- .page-section -->
-    @endif
+    @yield('content')
 
     <!-- <footer class="page-footer bg-image" style="background-image: url(siswa/img/footer.png);"> -->
     <footer class="page-footer bg-image" style="background-image: url({{ asset('siswa/img/footer.png') }});">
@@ -110,7 +98,6 @@
 
     <script src={{asset("siswa/js/theme.js")}}></script>
     <script src={{asset("js/common.js")}}></script>
-
+    
 </body>
-
 </html>

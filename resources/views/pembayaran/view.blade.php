@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+{{-- view untuk melihat daftar pembayaran yg telah dilakukan --}}
 @section('content')
 
 <!-- partial -->
