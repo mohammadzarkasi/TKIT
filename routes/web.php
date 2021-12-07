@@ -68,6 +68,8 @@ Route::middleware('loggedin')->group(function () {
     Route::get('pendaftaran/data-keluar', [PendaftaranController::class, 'data_keluar']);
     Route::post('pendaftaran/data-keluar', [PendaftaranController::class, 'save_data_keluar']);
     
+    Route::get('pendaftaran/data-selesai', [PendaftaranController::class, 'data_selesai']);
+
     Route::post('pendaftaran/create', 'pendaftaranController@store');
     Route::get('pendaftaran/export', 'pendaftaranController@export');
 });

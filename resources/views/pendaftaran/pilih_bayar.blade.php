@@ -18,7 +18,7 @@
                                 <th>Tanggal</th>
                                 <th>Bank Tujuan</th>
                                 <th>Nama Rekening Pengirim</th>
-                                <th>Status Verifikasi</th>
+                                <th>Status Verifikasi Pembayaran</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -32,7 +32,7 @@
                                     $status_verifikasi = 'Menunggu Verifikasi';
                                     switch ($item['verifikasi']) {
                                         case '2':
-                                            $status_verisikasi = 'Telah Diverifikasi';
+                                            $status_verifikasi = 'Telah Diverifikasi';
                                             break;
                                         case '3':
                                             $status_verifikasi = 'Pembayaran Tidak Valid';

@@ -47,7 +47,7 @@
                                 $status_verifikasi = 'Menunggu Verifikasi';
                                 switch ($row['verifikasi']) {
                                     case '2':
-                                        $status_verisikasi = 'Telah Diverifikasi';
+                                        $status_verifikasi = 'Telah Diverifikasi';
                                         break;
                                     case '3':
                                         $status_verifikasi = 'Pembayaran Tidak Valid';

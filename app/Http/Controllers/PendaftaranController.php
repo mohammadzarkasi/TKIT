@@ -32,10 +32,10 @@ class PendaftaranController extends Controller
             return redirect('/pendaftaran/bayar-dulu');
         }
 
-        if ($jumlah_pembayaran == 1) {
-            $bayar = $list_pembayaran[0];
-            return redirect('/pendaftaran/data-pribadi?bayar=' . $bayar['id']);
-        }
+        // if ($jumlah_pembayaran == 1) {
+        //     $bayar = $list_pembayaran[0];
+        //     return redirect('/pendaftaran/data-pribadi?bayar=' . $bayar['id']);
+        // }
 
         return view('pendaftaran.pilih_bayar', [
             'sess' => $sess,
@@ -108,6 +108,16 @@ class PendaftaranController extends Controller
         return $this->get_form_pendaftaran($req, 'form_data_registrasi');
     }
 
+    public function data_keluar(Request $req)
+    {
+        return $this->get_form_pendaftaran($req, 'form_data_keluar');
+    }
+
+    public function data_selesai(Request $req)
+    {
+        return view('pendaftaran.data_selesai', ['sess' => $req->sess]);
+    }
+
     private function save_data_pendaftaran(Request $req, $fields, $next)
     {
         $pembayaran = $this->cek_status_pembayaran($req);
@@ -135,6 +145,16 @@ class PendaftaranController extends Controller
             Pendaftaran::where('id', $pendaftaran['id'])->update($data);
         }
         return redirect('/pendaftaran/' . $next . '?bayar=' . $pembayaran['id']);
+    }
+
+    public function save_data_keluar(Request $req)
+    {
+        $fields = [
+            'keluar',
+            'Tanggal_Keluar',
+            'Alasan_Keluar',  
+        ];
+        return $this->save_data_pendaftaran($req, $fields, 'data-selesai');
     }
 
     public function save_data_registrasi(Request $req)
