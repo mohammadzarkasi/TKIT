@@ -44,6 +44,46 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('/admin/pembayaran_baru') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Pembayaran Baru
+                            <span class="right badge badge-danger"></span>
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('/admin/pembayaran_ok') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Pembayaran Terverifikasi
+                            <span class="right badge badge-danger"></span>
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('/admin/pendaftaran_baru') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Pendaftaran Baru
+                            <span class="right badge badge-danger"></span>
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('/admin/pendaftaran_ok') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Pendaftaran Terverifikasi
+                            <span class="right badge badge-danger"></span>
+                        </p>
+                    </a>
+                </li>
                 
                 {{--<li class="nav-item menu-open">
                     <a href="#" class="nav-link active">

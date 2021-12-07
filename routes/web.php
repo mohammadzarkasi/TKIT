@@ -13,6 +13,8 @@
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminHomeController;
+use App\Http\Controllers\AdminPembayaranController;
+use App\Http\Controllers\AdminPendaftaranController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
@@ -98,5 +100,11 @@ Route::prefix('admin')->group(function(){
 
     Route::middleware('admin-beneran')->group(function(){
         Route::get('/home', [AdminHomeController::class, 'index']);
+        
+        Route::get('/pembayaran_baru', [AdminPembayaranController::class, 'baru']);
+        Route::get('/pembayaran_ok', [AdminPembayaranController::class, 'terverifikasi']);
+
+        Route::get('/pendaftaran_baru', [AdminPendaftaranController::class, 'baru']);
+        Route::get('/pendaftaran_ok', [AdminPendaftaranController::class, 'terverifikasi']);
     });
 });
