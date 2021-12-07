@@ -51,7 +51,7 @@ class CreateTablePendaftaran2 extends Migration
             $table->enum('Terima_Kartu_Fisik', ['ya', 'tidak'])->nullable();
             $table->enum('Alasan', [
                 'Pemegang PKH/KPS/KIP', 'Penerima_BSM', 'Yatim_Piatu', 'Dampak_Bencana',
-                'Prenah_DO', 'Siswa_Miskin', 'Daerah_Konflik', 'Keluarga_Terpidna', 'Kelainan_Fisik'
+                'Prenah_DO', 'Siswa_Miskin', 'Daerah_Konflik', 'Keluarga_Terpidana', 'Kelainan_Fisik'
             ])->nullable();
             $table->string('Nama_Ayah')->nullable();
             $table->string('NIK_Ayah')->nullable();
@@ -59,7 +59,7 @@ class CreateTablePendaftaran2 extends Migration
             $table->enum('Pendidikan_Ayah', ['Tidak sekolah', 'Putus SD', 'SD', 'SMP', 'SMA', 'D1', 'D2', 'D3', 'D4/S1', 'S2', 'S3'])->nullable();
             $table->enum('Pekerjaan_Ayah', [
                 'tidak bekerja', 'Nelayan', 'Petani', 'PNS/TNI/POLRI', 'Karyawan Swasta',
-                'Pedagang Kecil', 'Pedagang besar', 'wiraswasta', 'wirausaha', 'buruh, pensiunan', 'meninggal dunia', 'lainnya'
+                'Pedagang Kecil', 'Pedagang besar', 'wiraswasta', 'wirausaha', 'buruh', 'pensiunan', 'meninggal dunia', 'lainnya'
             ])->nullable();
             $table->enum('Penghasilan_Ayah', [
                 'kurang_500.000', '500.000-999.999', '1juta-1.999.999',
@@ -75,7 +75,7 @@ class CreateTablePendaftaran2 extends Migration
             $table->enum('Pendidikan_Ibu', ['Tidak sekolah', 'Putus SD', 'SD', 'SMP', 'SMA', 'D1', 'D2', 'D3', 'D4/S1', 'S2', 'S3'])->nullable();
             $table->enum('Pekerjaan_Ibu', [
                 'tidak bekerja', 'Nelayan', 'Petani', 'PNS/TNI/POLRI', 'Karyawan Swasta',
-                'Pedagang Kecil', 'Pedagang besar', 'wiraswasta', 'wirausaha', 'buruh, pensiunan', 'meninggal dunia', 'lainnya'
+                'Pedagang Kecil', 'Pedagang besar', 'wiraswasta', 'wirausaha', 'buruh', 'pensiunan', 'meninggal dunia', 'lainnya'
             ])->nullable();
             $table->enum('Penghasilan_Ibu', [
                 'kurang_500.000', '500.000-999.999', '1juta-1.999.999',

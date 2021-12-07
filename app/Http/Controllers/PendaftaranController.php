@@ -14,6 +14,16 @@ class PendaftaranController extends Controller
 {
     public function index(Request $req)
     {
+        $sess = $req->sess;
+        $list_pendaftaran = Pendaftaran::where('id_user', $sess['id'])->get()->toArray();
+        return view('pendaftaran.semua', [
+            'sess' => $sess,
+            'list_pendaftaran' => $list_pendaftaran,
+        ]);
+    }
+
+    public function index2(Request $req)
+    {
         // $data_pendaftaran = \App\pendaftaran::all();
         // return view('pendaftaran.index',compact('data_pendaftaran'));
         $sess = $req->sess;
@@ -37,6 +47,24 @@ class PendaftaranController extends Controller
         //     return redirect('/pendaftaran/data-pribadi?bayar=' . $bayar['id']);
         // }
 
+        return view('pendaftaran.pilih_bayar', [
+            'sess' => $sess,
+            'list_pembayaran' => $list_pembayaran,
+        ]);
+    }
+
+    public function pilih_bayar(Request $req)
+    {
+        $sess = $req->sess;
+        $id = $sess['id'];
+
+        $list_pembayaran = Pembayaran::where([
+            'id_user' => $id,
+        ])
+            ->where(function ($query) {
+                $query->whereIn('verifikasi', [1, 2]);
+            })
+            ->get()->toArray();
         return view('pendaftaran.pilih_bayar', [
             'sess' => $sess,
             'list_pembayaran' => $list_pembayaran,

@@ -44,7 +44,8 @@ Route::middleware('loggedin')->group(function () {
     Route::get('pendaftaran', [PendaftaranController::class, 'index']);
     Route::get('pendaftaran/bayar-dulu', [PendaftaranController::class, 'bayar_dulu']);
     // Route::get('pendaftaran/create', 'pendaftaranController@create');
-    Route::get('pendaftaran/baru', [PendaftaranController::class, 'create']);
+    // Route::get('pendaftaran/baru', [PendaftaranController::class, 'create']);
+    Route::get('pendaftaran/baru', [PendaftaranController::class, 'pilih_bayar']);
     Route::get('pendaftaran/bayar-tidak-valid', [PendaftaranController::class, 'bayar_tidak_valid']);
 
     Route::get('pendaftaran/data-pribadi', [PendaftaranController::class, 'data_pribadi']);
