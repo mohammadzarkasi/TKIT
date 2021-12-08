@@ -35,6 +35,14 @@
 
                 <div class="navbar-collapse collapse" id="navbarContent">
                     <ul class="navbar-nav ml-auto">
+                        @if($sess != null)
+                            
+                            <li class="nav-item">
+                                <a class="nav-link">Halo, <strong>{{ $sess['name'] }}</strong></a>
+                            </li>
+
+                        @endif
+
                         <li class="nav-item">
                             {{-- <a class="nav-link" href="https://sites.google.com/view/ikh-buah-hati-kita/home?authuser=0">Profil</a> --}}
                             <a target="_blank" class="nav-link" href="https://tkit-buahhatikita.sch.id">Profil TKIT</a>
@@ -42,6 +50,9 @@
 
                         @if($sess != null)
                         
+                            <li class="nav-item">
+                                <a class="nav-link">Halo, {{ $sess['name'] }}</a>
+                            </li>
                             
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('pendaftaran') }}">Pendaftaran</a>
