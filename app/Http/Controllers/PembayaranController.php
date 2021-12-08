@@ -23,6 +23,27 @@ class PembayaranController extends Controller
         // return view('pembayaran.view',compact('data_pembayaran'));
     }
 
+    public function lihat(Request $req)
+    {
+        $id = $req->input('id');
+        $sess = $req->sess;
+    
+        $list_pembayaran = Pembayaran::where([
+            'id_user' => $sess['id'],
+            'id' => $id,
+        ])->get()->toArray();
+
+        if(count($list_pembayaran) < 1)
+        {
+            return view('pembayaran.data_tidak_valid', ['sess' => $sess]);
+        }
+
+        $pembayaran = $list_pembayaran[0];
+
+        return view('pembayaran.lihat', ['sess' => $sess, 'data' => $pembayaran]);
+
+    }
+
     public function success(Request $req)
     {
         return view('pembayaran.success', ['sess' => $req->sess]);

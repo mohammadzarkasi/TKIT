@@ -37,12 +37,9 @@ Route::middleware('loggedin')->group(function () {
     Route::get('pembayaran', [PembayaranController::class, 'semua']);
     Route::get('pembayaran/baru', [PembayaranController::class, 'index']);
     Route::get('pembayaran/success', [PembayaranController::class, 'success']);
+    Route::get('pembayaran/lihat', [PembayaranController::class, 'lihat']);
     Route::post('pembayaran', [PembayaranController::class, 'store']);
     Route::post('pembayaran/hapus', [PembayaranController::class, 'hapus']);
-
-    // Route::get('pembayaran/pembayaran', 'PembayaranController@create');
-    // Route::get('pembayaran/view', 'PembayaranController@store');
-    // Route::get('pembayaran/{id}/verifikasi', 'pembayaranController@verifikasi');
 
     Route::get('pendaftaran', [PendaftaranController::class, 'index']);
     Route::get('pendaftaran/bayar-dulu', [PendaftaranController::class, 'bayar_dulu']);
