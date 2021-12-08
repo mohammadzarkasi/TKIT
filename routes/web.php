@@ -100,11 +100,14 @@ Route::prefix('admin')->group(function(){
 
     Route::middleware('admin-beneran')->group(function(){
         Route::get('/home', [AdminHomeController::class, 'index']);
+        Route::get('/logout', [AdminAuthController::class, 'keluar']);
         
-        Route::get('/pembayaran_baru', [AdminPembayaranController::class, 'baru']);
-        Route::get('/pembayaran_ok', [AdminPembayaranController::class, 'terverifikasi']);
+        Route::get('/pembayaran', [AdminPembayaranController::class, 'baru']);
+        Route::get('/pembayaran/ok', [AdminPembayaranController::class, 'terverifikasi']);
+        Route::get('/pembayaran/lihat', [AdminPembayaranController::class, 'lihat']);
 
-        Route::get('/pendaftaran_baru', [AdminPendaftaranController::class, 'baru']);
-        Route::get('/pendaftaran_ok', [AdminPendaftaranController::class, 'terverifikasi']);
+        Route::get('/pendaftaran', [AdminPendaftaranController::class, 'baru']);
+        Route::get('/pendaftaran/ok', [AdminPendaftaranController::class, 'terverifikasi']);
+        Route::get('/pendaftaran/lihat', [AdminPendaftaranController::class, 'lihat']);
     });
 });

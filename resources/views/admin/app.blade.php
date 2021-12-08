@@ -67,6 +67,10 @@
     </div>
     <!-- ./wrapper -->
 
+    <script>
+        var base_url = '{{ url('/') }}';
+    </script>
+
     <!-- jQuery -->
     <script src="{{ asset('adminlte/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -101,6 +105,8 @@
     <script src="{{ asset('adminlte/js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('adminlte/js/pages/dashboard.js') }}"></script>
+    
+    <script src="{{ asset('js/admin/common.js') }}"></script>
 </body>
 
 </html>

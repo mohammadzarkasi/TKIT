@@ -46,7 +46,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ url('/admin/pembayaran_baru') }}" class="nav-link">
+                    <a href="{{ url('/admin/pembayaran') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Pembayaran Baru
@@ -56,7 +56,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ url('/admin/pembayaran_ok') }}" class="nav-link">
+                    <a href="{{ url('/admin/pembayaran/ok') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Pembayaran Terverifikasi
@@ -66,7 +66,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ url('/admin/pendaftaran_baru') }}" class="nav-link">
+                    <a href="{{ url('/admin/pendaftaran') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Pendaftaran Baru
@@ -76,10 +76,20 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ url('/admin/pendaftaran_ok') }}" class="nav-link">
+                    <a href="{{ url('/admin/pendaftaran/ok') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Pendaftaran Terverifikasi
+                            <span class="right badge badge-danger"></span>
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="promptLogout()">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Logout
                             <span class="right badge badge-danger"></span>
                         </p>
                     </a>

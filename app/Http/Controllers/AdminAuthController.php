@@ -12,7 +12,19 @@ class AdminAuthController extends Controller
 {
     public function index(Request $req)
     {
-        return view('admin.auth.login');
+        if($req->sess == null)
+        {
+            return view('admin.auth.login');
+        }
+        return redirect('/admin/home');
+    }
+
+    public function keluar(Request $req)
+    {
+        $sess = $req->sess;
+        MySession::where('token', $sess['token'])->delete();
+
+        return redirect('/admin');
     }
 
     public function do_login(Request $req)
