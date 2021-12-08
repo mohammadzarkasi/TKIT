@@ -105,6 +105,7 @@ Route::prefix('admin')->group(function(){
         Route::get('/pembayaran', [AdminPembayaranController::class, 'baru']);
         Route::get('/pembayaran/ok', [AdminPembayaranController::class, 'terverifikasi']);
         Route::get('/pembayaran/lihat', [AdminPembayaranController::class, 'lihat']);
+        Route::post('/pembayaran/verifikasi', [AdminPembayaranController::class, 'verifikasi']);
 
         Route::get('/pendaftaran', [AdminPendaftaranController::class, 'baru']);
         Route::get('/pendaftaran/ok', [AdminPendaftaranController::class, 'terverifikasi']);

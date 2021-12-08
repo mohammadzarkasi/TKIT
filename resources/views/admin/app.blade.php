@@ -69,6 +69,7 @@
 
     <script>
         var base_url = '{{ url('/') }}';
+        var ___csrf = '{{ csrf_token() }}';
     </script>
 
     <!-- jQuery -->
@@ -107,6 +108,8 @@
     <script src="{{ asset('adminlte/js/pages/dashboard.js') }}"></script>
     
     <script src="{{ asset('js/admin/common.js') }}"></script>
+
+    @yield('js')
 </body>
 
 </html>

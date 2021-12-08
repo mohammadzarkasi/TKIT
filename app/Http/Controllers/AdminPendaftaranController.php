@@ -20,7 +20,13 @@ class AdminPendaftaranController extends Controller
 
     public function terverifikasi(Request $req)
     {
-        return view('admin.pendaftaran.terverifikasi', ['sess' => $req->sess]);
+        $list_pendaftaran = Pendaftaran::where([
+            'verifikasi' => 2
+        ])->get()->toArray();
+        return view('admin.pendaftaran.terverifikasi', [
+            'sess' => $req->sess,
+            'list_pendaftaran' => $list_pendaftaran,
+        ]);
     }
 
 }
