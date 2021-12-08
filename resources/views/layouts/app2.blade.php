@@ -49,10 +49,6 @@
                         </li>
 
                         @if($sess != null)
-                        
-                            <li class="nav-item">
-                                <a class="nav-link">Halo, {{ $sess['name'] }}</a>
-                            </li>
                             
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('pendaftaran') }}">Pendaftaran</a>
