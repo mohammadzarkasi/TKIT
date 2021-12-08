@@ -20,6 +20,12 @@ class AdminPembayaranController extends Controller
 
     public function terverifikasi(Request $req)
     {
-        return view('admin.pembayaran.terverifikasi', ['sess' => $req->sess]);
+        $list_pembayaran = Pembayaran::where([
+            'verifikasi' => 2,
+        ])->get()->toArray();
+        return view('admin.pembayaran.terverifikasi', [
+            'sess' => $req->sess,
+            'list_pembayaran' => $list_pembayaran,
+        ]);
     }
 }

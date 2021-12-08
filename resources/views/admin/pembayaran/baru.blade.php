@@ -50,7 +50,7 @@
                                     ?>
                                     <tr>
                                         <td>{{ $counter }}</td>
-                                        <td>{{ $item['created_at'] }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item['created_at'])->addHours(7)->format('d M Y, H:i') }}</td>
                                         <td>{{ $item['bank'] }}</td>
                                         <td>{{ $item['nama'] }}</td>
                                         <td>
