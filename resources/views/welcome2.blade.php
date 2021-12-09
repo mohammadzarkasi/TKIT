@@ -1,4 +1,4 @@
-@extends('layouts.app2', ['sess' => $sess])
+@extends('layouts.app2', ['sess' => $sess, 'title' => 'Selamat Datang'])
 
 @section('content')
     
