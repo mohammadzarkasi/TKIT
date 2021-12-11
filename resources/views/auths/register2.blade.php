@@ -12,37 +12,43 @@
             <h6 class="font-weight-light"> Mohon isi data dengan benar.</h6>
             <form action="{{ url('/register') }}" method="POST" class="pt-3">
               @csrf
-              <!-- <div class="form-group">
-                <input name="name" type="text" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Nama">
-              </div> -->
+              
               <div class="form-group">
                 <label>Nama Orang Tua / Wali</label>
-                <input name="nama" type="text" class="form-control form-control-lg" id="nama" placeholder="Nama Orang Tua / Wai" />
+                <input name="nama" type="text" class="form-control form-control-lg" id="nama" placeholder="Nama Orang Tua / Wai" value="{{ old('nama') }}" />
               </div>
+
               <div class="form-group">
                 <label>Alamat Lengkap</label>
                 {{-- <input name="alamat" type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password"> --}}
-                <textarea class="form-control form-control-lg" id="alamat" name="alamat" placeholder="Alamat Lengkap" rows="4"></textarea>
+                <textarea class="form-control form-control-lg" id="alamat" name="alamat" placeholder="Alamat Lengkap" rows="4">{{ old('alamat') }}</textarea>
               </div>
+              
               <div class="form-group">
                 <label>Nomor HP</label>
-                <input name="nomor_hp" type="text" class="form-control form-control-lg" id="nomor_hp" placeholder="Nomor HP" />
+                <input name="nomor_hp" type="text" class="form-control form-control-lg" id="nomor_hp" placeholder="Nomor HP" value="{{ old('nomor_hp') }}" />
               </div>
               
               <div class="form-group">
                 <label>Pekerjaan</label>
-                <input name="pekerjaan" type="text" class="form-control form-control-lg" id="pekerjaan" placeholder="Pekerjaan" />
+                <input name="pekerjaan" type="text" class="form-control form-control-lg" id="pekerjaan" placeholder="Pekerjaan" value="{{ old('pekerjaan') }}" />
               </div>
 
               <div class="form-group">
                 <label>Email</label>
-                <input name="email" type="email" class="form-control form-control-lg" id="email" placeholder="Email" />
+                <input name="email" type="email" class="form-control form-control-lg" id="email" placeholder="Email" value="{{ old('email') }}"/>
               </div>
 
               <div class="form-group">
                 <label>Password</label>
                 <input name="password" type="password" class="form-control form-control-lg" id="password" placeholder="Password" />
               </div>
+
+                @if(\Session::has('errmsg'))
+                    <div class="text-center font-weight-light text-danger mb-4 alert alert-danger">
+                      {{ \Session::get('errmsg') }}
+                    </div>
+                @endif
 
               <div class="my-3">
                 <button type="submit" value="Login" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Daftar</button>

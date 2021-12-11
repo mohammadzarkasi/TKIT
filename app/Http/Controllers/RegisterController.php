@@ -14,31 +14,13 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
+        if ($req->sess != null) {
+            return redirect('/');
+        }
         // $data_register = \App\register::all();
         return view('auths.register2');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        // $user = new \App\user;
-        // $user->role = 'calon';
-        // $user->email = $request->email;
-        // $user->name = $request->name;
-        // $user->password = $request->password;
-        // $user->save();
-
-        // $request->request->add(['user_id'=>$user->id]);
-        // $register=\App\register::create($request->all());
-        // return redirect('register.register')->with('sukses','sukses');
-
-        return response()->json(['msg' => 'success']);
     }
 
     /**
@@ -49,6 +31,9 @@ class RegisterController extends Controller
      */
     public function store(Request $req)
     {
+        if ($req->sess != null) {
+            return redirect('/');
+        }
         // \App\register::create($request->all());
         // return redirect('/');
         $ts = Carbon::now();
@@ -63,6 +48,16 @@ class RegisterController extends Controller
             'created_at'    => $ts,
             'updated_at'    => $ts,
         ];
+
+        
+
+        // cek apakah email sudah dipakai atau belum
+        $existing_users = User::where('email', $data['email'])->get()->toArray();
+        if(count($existing_users) > 0)
+        {
+            return redirect()->back()->with('errmsg', 'email sudah terpakai')->withInput();
+        }
+
         User::insert($data);
         // return 'hore';
         // return view('auths.register_success');
@@ -71,6 +66,9 @@ class RegisterController extends Controller
 
     public function success(Request $req)
     {
+        if ($req->sess != null) {
+            return redirect('/');
+        }
         return view('auths.register_success');
     }
 
