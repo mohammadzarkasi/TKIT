@@ -29,6 +29,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('myguest')->group(function () {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/logout', [AuthController::class, 'logout']);
+    
+    Route::get('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'postlogin']);
+    
+    Route::get('/register', [RegisterController::class, 'index']);
+    Route::post('/register', [RegisterController::class, 'store']);
+    Route::get('/register-success', [RegisterController::class, 'success']);
 });
 
 Route::middleware('loggedin')->group(function () {
@@ -75,11 +82,9 @@ Route::middleware('loggedin')->group(function () {
     Route::get('pendaftaran/export', 'PendaftaranController@export');
 });
 
-Route::get('/login', [AuthController::class, 'login']);
-Route::post('/login', [AuthController::class, 'postlogin']);
-Route::post('register', [RegisterController::class, 'store']);
-Route::get('register', [RegisterController::class, 'index']);
-Route::get('register-success', [RegisterController::class, 'success']);
+
+
+
 // Route::get('verifikasi/pendaftaran', 'verifikasiController@index');
 // Route::get('dasboards/viewdaftar', 'pendaftaranController@store');
 

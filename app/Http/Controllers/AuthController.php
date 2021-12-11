@@ -16,18 +16,18 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function login()
+    public function login(Request $req)
     {
+        if ($req->sess != null) {
+            return redirect('/');
+        }
         return view('auths.login');
     }
 
     public function logout(Request $req)
     {
-        if($req->sess != null)
-        {
+        if ($req->sess != null) {
             $token = $req->sess['token'];
-            // print_r($token);
-            // exit();
             MySession::where('token', $token)->delete();
         }
 
@@ -52,10 +52,9 @@ class AuthController extends Controller
      */
     public function postlogin(Request $request)
     {
-        // if(Auth::attempt($request->only('email','password'))){
-        //     return redirect('/pendaftaran');
-        // }
-        // return redirect('/login');
+        if ($request->sess != null) {
+            return redirect('/');
+        }
 
         $email = $request->post('email');
         $pass = $request->post('password');
@@ -85,8 +84,7 @@ class AuthController extends Controller
             $ck = cookie('mysession', $token, 60 * 24 * 3);
             // return response()->json(['status' => 'success'])->cookie($ck);
             return redirect('/')->withCookie($ck);
-        }
-        else{
+        } else {
             // return redirect()->back()->with
             return redirect('/login')->with('errmsg', 'password tidak cocok')->withInput();
         }
