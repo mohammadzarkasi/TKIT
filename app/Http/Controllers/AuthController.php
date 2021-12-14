@@ -8,6 +8,7 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -70,7 +71,8 @@ class AuthController extends Controller
         }
         $user = $users[0];
 
-        if ($user['password'] == $pass) {
+        // if ($user['password'] == $pass) {
+        if (Hash::check($pass, $user['password']) == true) {
             $skrg = Carbon::now();
             $token = Str::random(10);
             MySession::insert([
@@ -88,6 +90,45 @@ class AuthController extends Controller
             // return redirect()->back()->with
             return redirect('/login')->with('errmsg', 'password tidak cocok')->withInput();
         }
+    }
+
+    public function forgot_password(Request $req)
+    {
+        $sess = $req->sess;
+        if ($sess != null) {
+            return redirect('/')->with('msg', 'Anda telah login');
+        }
+
+        return view('auths.forgot_pass');
+    }
+
+    public function do_forgot_password(Request $req)
+    {
+        $sess = $req->sess;
+        if ($sess != null) {
+            return redirect('/')->with('msg', 'Anda telah login');
+        }
+
+        $email = $req->post('email');
+
+        $list_users = User::where('email', $email)->get()->toArray();
+
+        if (count($list_users) > 0) {
+            $user = $list_users[0];
+            $token = Str::random(5);
+            $ts =  Carbon::now();
+            User::where('id', $user['id'])->update([
+                'updated_at' => $ts,
+                'reset_pass_token' => $token,
+            ]);
+        }
+
+        return redirect('/forgot-success');
+    }
+
+    public function forgot_pass_success(Request $req)
+    {
+        return view('auths.forgot_success');
     }
 
     /**

@@ -65,10 +65,11 @@ class RegisterController extends Controller
         // return 'hore';
         // return view('auths.register_success');
 
-        Mail::to($data['email'])->send(new EmailRegistrasi([
-            'email' => $data['email'],
-            'token' => $token,
-        ]));
+        // kirim email
+        // Mail::to($data['email'])->send(new EmailRegistrasi([
+        //     'email' => $data['email'],
+        //     'token' => $token,
+        // ]));
 
         return redirect('register-success');
     }

@@ -40,6 +40,9 @@ Route::middleware('myguest')->group(function () {
     
     Route::get('/login', [AuthController::class, 'login']);
     Route::post('/login', [AuthController::class, 'postlogin']);
+    Route::get('/forgot-password', [AuthController::class, 'forgot_password']);
+    Route::get('/forgot-success', [AuthController::class, 'forgot_pass_success']);
+    Route::post('/forgot-password', [AuthController::class, 'do_forgot_password']);
     
     Route::get('/register', [RegisterController::class, 'index']);
     Route::post('/register', [RegisterController::class, 'store']);
