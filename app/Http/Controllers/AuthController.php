@@ -61,9 +61,18 @@ class AuthController extends Controller
         }
         $user = $users[0];
 
-        if($user['is_activated'] == '0')
-        {
+        if ($user['is_activated'] == '0') {
             $msg = 'Akun Anda belum diaktivasi. Periksa petunjuk aktivasi yang telah kami kirim ke email Anda';
+            return redirect()->back()->with('errmsg', $msg)->withInput();
+        }
+
+        if ($user['is_suspended'] == '1') {
+            $msg = 'Akun Anda sedang ditangguhkan. Silakan hubungi Admin untuk dapat menggunakan akun Anda.';
+            return redirect()->back()->with('errmsg', $msg)->withInput();
+        }
+
+        if ($user['is_terminated'] == '1') {
+            $msg = 'Akun Anda telah dihentikan (terminated).';
             return redirect()->back()->with('errmsg', $msg)->withInput();
         }
 
@@ -111,12 +120,19 @@ class AuthController extends Controller
 
         if (count($list_users) > 0) {
             $user = $list_users[0];
-            $token = Str::random(5);
-            $ts =  Carbon::now();
-            User::where('id', $user['id'])->update([
-                'updated_at' => $ts,
-                'reset_pass_token' => $token,
-            ]);
+            $user_is_valid = true;
+            if ($user['is_activated'] == '0' || $user['is_suspended'] == '1' || $user['is_terminated'] == '1') {
+                $user_is_valid = false;
+            }
+
+            if ($user_is_valid == true) {
+                $token = Str::random(5);
+                $ts =  Carbon::now();
+                User::where('id', $user['id'])->update([
+                    'updated_at' => $ts,
+                    'reset_pass_token' => $token,
+                ]);
+            }
         }
 
         return redirect('/forgot-success');
@@ -150,13 +166,11 @@ class AuthController extends Controller
         $pass = $req->post('password');
         $pass2 = $req->post('password2');
 
-        if(empty($pass) == true)
-        {
+        if (empty($pass) == true) {
             // die('password kosong');
             return redirect()->back()->with('errmsg', 'passsword tidak boleh kosong')->withInput();
         }
-        if($pass != $pass2)
-        {
+        if ($pass != $pass2) {
             // die('password tidak sama');
             return redirect()->back()->with('errmsg', 'password dan ulangi password tidak cocok')->withInput();
         }
@@ -166,8 +180,7 @@ class AuthController extends Controller
             'reset_pass_token' => $kode,
         ])->get()->toArray();
 
-        if(count($list_users) < 1)
-        {
+        if (count($list_users) < 1) {
             // die('tidak ditemukan');
             return redirect()->back()->with('errmsg', 'email dan/atau kode reset tidak ditemukan')->withInput();
         }
@@ -187,5 +200,4 @@ class AuthController extends Controller
     {
         return view('auths.reset_success');
     }
-
 }
