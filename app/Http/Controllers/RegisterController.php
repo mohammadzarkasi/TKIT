@@ -19,9 +19,9 @@ class RegisterController extends Controller
      */
     public function index(Request $req)
     {
-        if ($req->sess != null) {
-            return redirect('/');
-        }
+        // if ($req->sess != null) {
+        //     return redirect('/');
+        // }
         // $data_register = \App\register::all();
         return view('auths.register2');
     }
@@ -34,9 +34,9 @@ class RegisterController extends Controller
      */
     public function store(Request $req)
     {
-        if ($req->sess != null) {
-            return redirect('/');
-        }
+        // if ($req->sess != null) {
+        //     return redirect('/');
+        // }
         // \App\register::create($request->all());
         // return redirect('/');
         $ts = Carbon::now();
@@ -76,54 +76,45 @@ class RegisterController extends Controller
 
     public function success(Request $req)
     {
-        if ($req->sess != null) {
-            return redirect('/');
-        }
+        // if ($req->sess != null) {
+        //     return redirect('/');
+        // }
         return view('auths.register_success');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function aktivasi(Request $req)
     {
-        //
+        $email = $req->input('email');
+        $kode = $req->input('token');
+
+        $list_users = User::where([
+            'email' => $email,
+            'register_token' => $kode,
+        ])->get()->toArray();
+
+        if(count($list_users) > 0)
+        {
+            $user = $list_users[0];
+            $ts = Carbon::now();
+            User::where('id', $user['id'])->update([
+                'updated_at' => $ts,
+                'register_token' => '',
+                'is_activated' => 1,
+            ]);
+
+            return redirect('/account-activated');
+        }
+        return redirect('/activation-failed');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function account_activated(Request $req)
     {
-        //
+        return view('auths.account_activated');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function activation_failed(Request $req)
     {
-        //
+        return view('auths.activation_failed');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

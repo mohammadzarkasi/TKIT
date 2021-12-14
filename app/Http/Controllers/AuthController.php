@@ -19,30 +19,20 @@ class AuthController extends Controller
      */
     public function login(Request $req)
     {
-        if ($req->sess != null) {
-            return redirect('/');
-        }
+        // if ($req->sess != null) {
+        //     return redirect('/');
+        // }
         return view('auths.login');
     }
 
     public function logout(Request $req)
     {
-        if ($req->sess != null) {
-            $token = $req->sess['token'];
-            MySession::where('token', $token)->delete();
-        }
+        // if ($req->sess != null) {
+        $token = $req->sess['token'];
+        MySession::where('token', $token)->delete();
+        // }
 
         return redirect('/');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -53,9 +43,9 @@ class AuthController extends Controller
      */
     public function postlogin(Request $request)
     {
-        if ($request->sess != null) {
-            return redirect('/');
-        }
+        // if ($request->sess != null) {
+        //     return redirect('/');
+        // }
 
         $email = $request->post('email');
         $pass = $request->post('password');
@@ -70,6 +60,12 @@ class AuthController extends Controller
             return redirect()->back()->with('errmsg', 'user tidak ditemukan')->withInput();
         }
         $user = $users[0];
+
+        if($user['is_activated'] == '0')
+        {
+            $msg = 'Akun Anda belum diaktivasi. Periksa petunjuk aktivasi yang telah kami kirim ke email Anda';
+            return redirect()->back()->with('errmsg', $msg)->withInput();
+        }
 
         // if ($user['password'] == $pass) {
         if (Hash::check($pass, $user['password']) == true) {
@@ -94,20 +90,20 @@ class AuthController extends Controller
 
     public function forgot_password(Request $req)
     {
-        $sess = $req->sess;
-        if ($sess != null) {
-            return redirect('/')->with('msg', 'Anda telah login');
-        }
+        // $sess = $req->sess;
+        // if ($sess != null) {
+        //     return redirect('/')->with('msg', 'Anda telah login');
+        // }
 
         return view('auths.forgot_pass');
     }
 
     public function do_forgot_password(Request $req)
     {
-        $sess = $req->sess;
-        if ($sess != null) {
-            return redirect('/')->with('msg', 'Anda telah login');
-        }
+        // $sess = $req->sess;
+        // if ($sess != null) {
+        //     return redirect('/')->with('msg', 'Anda telah login');
+        // }
 
         $email = $req->post('email');
 
@@ -133,21 +129,21 @@ class AuthController extends Controller
 
     public function reset_password(Request $req)
     {
-        $sess = $req->sess;
-        if($sess != null)
-        {
-            return redirect('/')->with('msg', 'anda telah login');
-        }
+        // $sess = $req->sess;
+        // if($sess != null)
+        // {
+        //     return redirect('/')->with('msg', 'anda telah login');
+        // }
         return view('auths.reset_password');
     }
 
     public function do_reset_password(Request $req)
     {
-        $sess = $req->sess;
-        if($sess != null)
-        {
-            return redirect('/')->with('msg', 'anda telah login');
-        }
+        // $sess = $req->sess;
+        // if($sess != null)
+        // {
+        //     return redirect('/')->with('msg', 'anda telah login');
+        // }
 
         $email = $req->post('email');
         $kode = $req->post('kode');
@@ -192,48 +188,4 @@ class AuthController extends Controller
         return view('auths.reset_success');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

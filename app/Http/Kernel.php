@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'myguest' => \App\Http\Middleware\GuestCheck::class,
         'loggedin' => \App\Http\Middleware\CheckSession::class,
+        'must-not-logged-in' => \App\Http\Middleware\MustNotLoggedin::class,
         'admin-guest' => \App\Http\Middleware\AdminGuest::class,
         'admin-beneran' => \App\Http\Middleware\AdminBeneran::class,
     ];

@@ -34,10 +34,7 @@ Route::get('/surat', function () {
     return 'ok';
 });
 
-Route::middleware('myguest')->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
-    Route::get('/logout', [AuthController::class, 'logout']);
-    
+Route::middleware('must-not-logged-in')->group(function () {
     Route::get('/login', [AuthController::class, 'login']);
     Route::post('/login', [AuthController::class, 'postlogin']);
     Route::get('/forgot-password', [AuthController::class, 'forgot_password']);
@@ -47,13 +44,22 @@ Route::middleware('myguest')->group(function () {
     Route::get('/reset-password', [AuthController::class, 'reset_password']);
     Route::get('/reset-success', [AuthController::class, 'reset_success']);
     Route::post('/reset-password', [AuthController::class, 'do_reset_password']);
-    
+
     Route::get('/register', [RegisterController::class, 'index']);
     Route::post('/register', [RegisterController::class, 'store']);
     Route::get('/register-success', [RegisterController::class, 'success']);
+
+    Route::get('/activate-account', [RegisterController::class, 'aktivasi']);
+    Route::get('/account-activated', [RegisterController::class, 'account_activated']);
+    Route::get('/activation-failed', [RegisterController::class, 'activation_failed']);
+});
+
+Route::middleware('myguest')->group(function () {
+    Route::get('/', [HomeController::class, 'index']);
 });
 
 Route::middleware('loggedin')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout']);
     // Route::get('pembayaran', 'pembayaranController@index');
     // Route::post('pembayaran/pembayaran', 'pembayaranController@store');
     Route::get('pembayaran', [PembayaranController::class, 'semua']);
@@ -72,13 +78,13 @@ Route::middleware('loggedin')->group(function () {
 
     Route::get('pendaftaran/data-pribadi', [PendaftaranController::class, 'data_pribadi']);
     Route::post('pendaftaran/data-pribadi', [PendaftaranController::class, 'save_data_pribadi']);
-    
+
     Route::get('pendaftaran/data-ayah', [PendaftaranController::class, 'data_ayah']);
     Route::post('pendaftaran/data-ayah', [PendaftaranController::class, 'save_data_ayah']);
-    
+
     Route::get('pendaftaran/data-ibu', [PendaftaranController::class, 'data_ibu']);
     Route::post('pendaftaran/data-ibu', [PendaftaranController::class, 'save_data_ibu']);
-    
+
     Route::get('pendaftaran/data-wali', [PendaftaranController::class, 'data_wali']);
     Route::post('pendaftaran/data-wali', [PendaftaranController::class, 'save_data_wali']);
 
@@ -90,7 +96,7 @@ Route::middleware('loggedin')->group(function () {
 
     Route::get('pendaftaran/data-keluar', [PendaftaranController::class, 'data_keluar']);
     Route::post('pendaftaran/data-keluar', [PendaftaranController::class, 'save_data_keluar']);
-    
+
     Route::get('pendaftaran/data-selesai', [PendaftaranController::class, 'data_selesai']);
 
     // Route::post('pendaftaran/create', 'pendaftaranController@store');
@@ -104,21 +110,21 @@ Route::middleware('loggedin')->group(function () {
 // Route::get('dasboards/viewdaftar', 'pendaftaranController@store');
 
 
-    //Route::post('/create','pendaftaranController@store');
-    //Route::get('ppdb','Ppdb_controller@index');
-    //Route::post('ppdb','Ppdb_controller@store');
+//Route::post('/create','pendaftaranController@store');
+//Route::get('ppdb','Ppdb_controller@index');
+//Route::post('ppdb','Ppdb_controller@store');
 
-Route::prefix('admin')->group(function(){
-    Route::middleware('admin-guest')->group(function(){
+Route::prefix('admin')->group(function () {
+    Route::middleware('admin-guest')->group(function () {
         Route::get('/', [AdminAuthController::class, 'index']);
         Route::post('/', [AdminAuthController::class, 'do_login']);
     });
 
 
-    Route::middleware('admin-beneran')->group(function(){
+    Route::middleware('admin-beneran')->group(function () {
         Route::get('/home', [AdminHomeController::class, 'index']);
         Route::get('/logout', [AdminAuthController::class, 'keluar']);
-        
+
         Route::get('/pembayaran', [AdminPembayaranController::class, 'baru']);
         Route::get('/pembayaran/ok', [AdminPembayaranController::class, 'terverifikasi']);
         Route::get('/pembayaran/lihat', [AdminPembayaranController::class, 'lihat']);
