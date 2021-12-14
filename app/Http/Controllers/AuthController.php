@@ -131,6 +131,67 @@ class AuthController extends Controller
         return view('auths.forgot_success');
     }
 
+    public function reset_password(Request $req)
+    {
+        $sess = $req->sess;
+        if($sess != null)
+        {
+            return redirect('/')->with('msg', 'anda telah login');
+        }
+        return view('auths.reset_password');
+    }
+
+    public function do_reset_password(Request $req)
+    {
+        $sess = $req->sess;
+        if($sess != null)
+        {
+            return redirect('/')->with('msg', 'anda telah login');
+        }
+
+        $email = $req->post('email');
+        $kode = $req->post('kode');
+        $pass = $req->post('password');
+        $pass2 = $req->post('password2');
+
+        if(empty($pass) == true)
+        {
+            // die('password kosong');
+            return redirect()->back()->with('errmsg', 'passsword tidak boleh kosong')->withInput();
+        }
+        if($pass != $pass2)
+        {
+            // die('password tidak sama');
+            return redirect()->back()->with('errmsg', 'password dan ulangi password tidak cocok')->withInput();
+        }
+
+        $list_users = User::where([
+            'email' => $email,
+            'reset_pass_token' => $kode,
+        ])->get()->toArray();
+
+        if(count($list_users) < 1)
+        {
+            // die('tidak ditemukan');
+            return redirect()->back()->with('errmsg', 'email dan/atau kode reset tidak ditemukan')->withInput();
+        }
+
+        $user = $list_users[0];
+        $ts = Carbon::now();
+        User::where('id', $user['id'])->update([
+            'reset_pass_token' => '',
+            'updated_at' => $ts,
+            'password' => Hash::make($pass),
+        ]);
+
+        return redirect('/reset-success');
+    }
+
+    public function reset_success(Request $req)
+    {
+        return view('auths.reset_success');
+    }
+
     /**
      * Display the specified resource.
      *

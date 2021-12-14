@@ -29,15 +29,15 @@
               {{-- <div class="brand-logo1">
                 <img src={{asset("siswa/img/logo1.png")}} alt="logo">
               </div> --}}
-              <h1>Lupa Password</h1>
+              <h1>Reset Password</h1>
               {{-- <h4>Silahkan melakukan Login</h4> --}}
-              <h6 class="font-weight-light">Kami telah mengirimkan petunjuk pengaturan ulang password ke email Anda. Silakan diikuti untuk dapat menlanjutkan.</h6>
+              <h6 class="font-weight-light">Password Anda berhasil diubah.</h6>
               
                 <div class="text-center font-weight-light">
                     Kembali ke <a href="{{ url('/') }}" class="text-primary">Beranda</a>
                 </div>
                 <div class="text-center font-weight-light">
-                    Atau  <a href="{{ url('/reset-password') }}" class="text-primary">atur ulang password sekarang</a>
+                    Atau  <a href="{{ url('/login') }}" class="text-primary">login sekarang</a>
                 </div>
               </form>
             </div>
