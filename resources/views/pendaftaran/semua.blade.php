@@ -62,6 +62,7 @@
                                     <td>{{ $row['Nama_Lengkap'] }}</td>
                                     <td>{{ $status_verifikasi }}</td>
                                     <td>
+                                        
                                         <a class="btn btn-success" href="{{ url('/pendaftaran/data-pribadi?bayar=' . $row['id_bayar']) }}">Lihat</a>
                                         
                                         @if ($row['verifikasi'] == '1')

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Pembayaran;
+use App\Pendaftaran;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PembayaranController extends Controller
 {
@@ -27,21 +29,21 @@ class PembayaranController extends Controller
     {
         $id = $req->input('id');
         $sess = $req->sess;
-    
+
+
+
         $list_pembayaran = Pembayaran::where([
             'id_user' => $sess['id'],
             'id' => $id,
         ])->get()->toArray();
 
-        if(count($list_pembayaran) < 1)
-        {
+        if (count($list_pembayaran) < 1) {
             return view('pembayaran.data_tidak_valid', ['sess' => $sess]);
         }
 
         $pembayaran = $list_pembayaran[0];
 
         return view('pembayaran.lihat', ['sess' => $sess, 'data' => $pembayaran]);
-
     }
 
     public function success(Request $req)
@@ -53,10 +55,36 @@ class PembayaranController extends Controller
     {
         $sess = $req->sess;
         $id = $sess['id'];
-        $rows = Pembayaran::where([
-            'id_user' => $id,
-        ])
-            ->get()->toArray();
+
+        $mDaftar = new Pendaftaran();
+        $mBayar = new Pembayaran();
+
+        $rows = DB::table($mBayar->getTable() . ' as bayar')
+            ->leftJoin($mDaftar->getTable() . ' as daftar', 'daftar.id_bayar', '=', 'bayar.id')
+            ->where([
+                'bayar.id_user' => $sess['id'],
+                // 'bayar.id' => $id,
+            ])
+            ->select('bayar.*', 'daftar.id as id_daftar')
+            ->get();
+        
+        $rows2 = [];
+        foreach($rows as $row)
+        {
+            $rows2[] = (array) $row;
+        }
+        $rows = $rows2;
+        
+        // print_r($rows);
+        // exit();
+
+        // $rows = Pembayaran::where([
+        //     'id_user' => $id,
+        // ])->get()->toArray();
+
+        // var_dump($rows);
+        // print_r($rows);
+        // exit();
 
         return view('pembayaran.semua', [
             'sess' => $req->sess,
@@ -133,40 +161,6 @@ class PembayaranController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -196,21 +190,21 @@ class PembayaranController extends Controller
         return redirect()->back()->with('msg', 'data berhasil dihapus');
     }
 
-    public function verifikasi($id)
-    {
-        $pembayaran = \App\pembayaran::find($id);
+    // public function verifikasi($id)
+    // {
+    //     $pembayaran = \App\pembayaran::find($id);
 
-        $verifikasi_sekarang = $pembayaran->verifikasi;
+    //     $verifikasi_sekarang = $pembayaran->verifikasi;
 
-        if ($verifikasi_sekarang == 1) {
-            \App\pembayaran::find($id)->update([
-                'verifikasi' => 0
-            ]);
-        } else {
-            \App\pembayaran::find($id)->update([
-                'verifikasi' => 1
-            ]);
-        }
-        return redirect('pembayaran');
-    }
+    //     if ($verifikasi_sekarang == 1) {
+    //         \App\pembayaran::find($id)->update([
+    //             'verifikasi' => 0
+    //         ]);
+    //     } else {
+    //         \App\pembayaran::find($id)->update([
+    //             'verifikasi' => 1
+    //         ]);
+    //     }
+    //     return redirect('pembayaran');
+    // }
 }
